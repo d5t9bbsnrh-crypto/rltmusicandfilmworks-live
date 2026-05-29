@@ -1,0 +1,269 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RLT Films</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: black;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .page {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        padding: 24px 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: gold;
+        text-decoration: none;
+        border: 1px solid rgba(255, 215, 0, 0.55);
+        padding: 12px 20px;
+        font-size: 18px;
+        letter-spacing: 2px;
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: 6px;
+        transition: 0.25s ease;
+      }
+
+      .nav a:hover {
+        background: gold;
+        color: black;
+      }
+
+      .hero {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .hero img {
+        width: 92%;
+        max-width: 1400px;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      .film-section {
+        width: 92%;
+        max-width: 1200px;
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .film-card {
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 10px;
+        padding: 24px;
+        background: rgba(255, 255, 255, 0.03);
+        transition: 0.3s ease;
+      }
+
+      .film-card:hover {
+        border-color: gold;
+        transform: translateY(-4px);
+      }
+
+      .film-card h2 {
+        color: gold;
+        font-size: 24px;
+        margin-bottom: 14px;
+      }
+
+      .film-card p {
+        color: #ddd;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .button {
+        display: inline-block;
+        text-decoration: none;
+        color: black;
+        background: gold;
+        padding: 12px 18px;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: 0.25s ease;
+      }
+
+      .button:hover {
+        opacity: 0.85;
+      }
+
+      .footer {
+        width: 92%;
+        max-width: 1400px;
+        margin-top: 40px;
+        padding: 40px 0 20px;
+        border-top: 1px solid rgba(255,255,255,0.12);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+      }
+
+      .footer h3 {
+        color: #2f5cff;
+        margin-bottom: 14px;
+        font-size: 24px;
+      }
+
+      .footer p,
+      .footer a {
+        color: #d5d5d5;
+        text-decoration: none;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .copyright {
+        width: 100%;
+        text-align: center;
+        color: #999;
+        padding: 24px 10px 40px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .nav {
+          gap: 8px;
+          padding: 14px 8px;
+        }
+
+        .nav a {
+          font-size: 11px;
+          padding: 9px 10px;
+          letter-spacing: 1px;
+        }
+
+        .hero img {
+          width: 96%;
+        }
+
+        .film-card h2 {
+          font-size: 20px;
+        }
+
+        .footer {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <nav class="nav">
+        <a href="/">HOME</a>
+        <a href="/music">MUSIC</a>
+        <a href="/films">FILMS</a>
+        <a href="/store">STORE</a>
+        <a href="/contacts">CONTACT</a>
+        <a href="/cart">CART</a>
+      </nav>
+
+      <section class="hero">
+        <img
+          src="/images/filmbanner.png"
+          alt="RLT Films"
+        />
+      </section>
+
+      <section class="film-section">
+        <div class="film-card">
+          <h2>FILM PROJECTS</h2>
+          <p>
+            Original films, documentaries, visual storytelling,
+            and cinematic productions from RLT Music & Filmworks.
+          </p>
+          <a class="button" href="/store">VIEW FILMS</a>
+        </div>
+
+        <div class="film-card">
+          <h2>DOCUMENTARIES</h2>
+          <p>
+            Real stories, cultural impact, behind-the-scenes
+            productions, and legacy-driven projects.
+          </p>
+          <a class="button" href="/contacts">LEARN MORE</a>
+        </div>
+
+        <div class="film-card">
+          <h2>PRODUCTION WORKS</h2>
+          <p>
+            Creative production, directing, visual media,
+            editing, and entertainment development services.
+          </p>
+          <a class="button" href="/contacts">CONTACT US</a>
+        </div>
+      </section>
+
+      <section class="footer">
+        <div>
+          <h3>RLT</h3>
+          <p>
+            RLT Music & Filmworks is dedicated to creating
+            music, film, culture, and legacy through powerful storytelling.
+          </p>
+        </div>
+
+        <div>
+          <h3>CONTACT</h3>
+          <p>
+            Las Vegas, Nevada<br />
+            info@rltmusicandfilmworks.com<br />
+            (702) 900-2173
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h3>QUICK LINKS</h3>
+          <a href="/music">Music</a>
+          <a href="/films">Films</a>
+          <a href="/store">Store</a>
+          <a href="/contacts">Contact</a>
+        </div>
+      </section>
+
+      <div class="copyright">
+        © 2026 RLT Music & Filmworks. All Rights Reserved.
+      </div>
+    </div>
+  </body>
+</html>

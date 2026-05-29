@@ -1,0 +1,458 @@
+
+
+
+
+
+
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <title>RLT Store</title>
+
+    <style>
+
+      *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+      }
+
+      html,
+      body{
+        width:100%;
+        min-height:100%;
+        overflow-x:hidden;
+        background:#000;
+      }
+
+      body{
+        font-family:Arial, Helvetica, sans-serif;
+        color:white;
+      }
+
+      a{
+        touch-action:manipulation;
+        -webkit-tap-highlight-color:transparent;
+      }
+
+      .hero{
+        min-height:100vh;
+        background:#000;
+
+        display:flex;
+        flex-direction:column;
+
+        position:relative;
+        overflow:hidden;
+      }
+
+      .hero::before{
+        content:"";
+
+        position:absolute;
+
+        top:50%;
+        left:50%;
+
+        transform:translate(-50%, -50%);
+
+        width:96%;
+        height:96%;
+
+        background-image:url('/images/hero/logos/Ozone-store.png');
+
+        background-size:contain;
+        background-repeat:no-repeat;
+        background-position:center center;
+
+        z-index:1;
+
+        pointer-events:none;
+      }
+
+      nav{
+        width:100%;
+
+        padding:20px 40px;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        position:fixed;
+        top:0;
+        left:0;
+
+        z-index:99999;
+      }
+
+      .nav-left{
+        display:flex;
+        align-items:center;
+        gap:40px;
+
+        padding:14px 40px;
+
+        background:rgba(0,0,0,0.45);
+
+        border:1px solid rgba(255,215,0,0.18);
+        border-radius:20px;
+
+        backdrop-filter:blur(12px);
+      }
+
+      nav a{
+        color:white;
+        text-decoration:none;
+
+        letter-spacing:2px;
+        font-size:1.35rem;
+        font-weight:700;
+
+        transition:0.3s ease;
+      }
+
+      nav a:hover{
+        color:#ffd700;
+      }
+
+      .hero-content{
+        flex:1;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        position:relative;
+        z-index:2;
+      }
+
+      /* DOWNLOAD SECTION */
+
+      .download-button{
+        position:absolute;
+
+        top:50%;
+        left:72%;
+
+        transform:translateY(-50%);
+
+        z-index:5;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+      }
+
+      /* FLASHING THE FUNK STRUT */
+
+      .funk-title{
+        font-size:2.1rem;
+        font-weight:900;
+        letter-spacing:4px;
+        text-transform:uppercase;
+
+        animation:flashFunk 1s infinite;
+
+        text-align:center;
+
+        text-shadow:
+          0 0 10px rgba(255,255,255,0.9),
+          0 0 22px rgba(255,255,255,0.7);
+      }
+
+      @keyframes flashFunk{
+
+        0%{
+          color:#fff;
+          opacity:1;
+        }
+
+        50%{
+          color:#000;
+          opacity:0.25;
+        }
+
+        100%{
+          color:#fff;
+          opacity:1;
+        }
+
+      }
+
+      .download-btn{
+        display:inline-block;
+
+        padding:20px 40px;
+
+        background:#d9b54a;
+        color:#000;
+
+        border-radius:18px;
+
+        text-decoration:none;
+
+        font-weight:800;
+        letter-spacing:1px;
+
+        font-size:1.2rem;
+
+        box-shadow:0 0 22px rgba(255,215,0,0.55);
+
+        transition:0.3s ease;
+      }
+
+      .download-btn:hover{
+        background:#fff;
+        transform:translateY(-2px);
+      }
+
+      /* TABLETS */
+
+      @media (max-width:1024px){
+
+        .download-button{
+          left:70%;
+        }
+
+        .funk-title{
+          font-size:1.7rem;
+        }
+
+        .download-btn{
+          padding:16px 28px;
+          font-size:1rem;
+        }
+
+      }
+
+      /* MOBILE PORTRAIT */
+
+      @media screen and (max-width:768px) and (orientation:portrait){
+
+        .hero{
+          min-height:100svh;
+        }
+
+        nav{
+          padding:14px 10px;
+        }
+
+        .nav-left{
+          gap:14px;
+          padding:12px 20px;
+
+          flex-wrap:wrap;
+          justify-content:center;
+        }
+
+        nav a{
+          font-size:0.92rem;
+          letter-spacing:1px;
+        }
+
+        .download-button{
+
+          top:78%;
+          left:50%;
+
+          transform:translate(-50%, -50%);
+        }
+
+        .funk-title{
+          font-size:1.15rem;
+          letter-spacing:2px;
+        }
+
+        .download-btn{
+          padding:12px 24px;
+          font-size:0.82rem;
+
+          border-radius:14px;
+
+          white-space:nowrap;
+        }
+
+      }
+
+      /* SMALL PHONES */
+
+      @media (max-width:480px){
+
+        nav a{
+          font-size:0.78rem;
+        }
+
+        .download-button{
+          top:80%;
+        }
+
+        .funk-title{
+          font-size:0.95rem;
+        }
+
+        .download-btn{
+          padding:11px 20px;
+          font-size:0.74rem;
+        }
+
+      }
+
+      /* VERY SMALL DEVICES */
+
+      @media (max-width:390px){
+
+        nav a{
+          font-size:0.72rem;
+        }
+
+        .funk-title{
+          font-size:0.82rem;
+        }
+
+        .download-btn{
+          padding:10px 18px;
+          font-size:0.7rem;
+        }
+
+      }
+
+      /* LANDSCAPE MOBILE */
+
+      @media screen and (max-width:932px) and (orientation:landscape){
+
+        nav{
+          padding:10px 10px;
+        }
+
+        .nav-left{
+          gap:16px;
+          padding:10px 18px;
+        }
+
+        nav a{
+          font-size:0.78rem;
+          letter-spacing:1px;
+        }
+
+        .download-button{
+          top:50%;
+          left:78%;
+        }
+
+        .funk-title{
+          font-size:0.95rem;
+        }
+
+        .download-btn{
+          padding:8px 16px;
+
+          font-size:0.62rem;
+
+          border-radius:10px;
+
+          white-space:nowrap;
+        }
+
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <section class="hero">
+
+      <nav>
+
+        <div class="nav-left">
+
+          <a href="/">HOME</a>
+          <a href="/store">STORE</a>
+          <a href="/cart">CART</a>
+
+        </div>
+
+      </nav>
+
+      <div class="hero-content">
+
+        <div class="download-button">
+
+          <div class="funk-title">
+            THE FUNK STRUT
+          </div>
+
+          <a
+            href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
+            class="download-btn"
+strojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+17:31:05 [vite] Re-optimizing dependencies because vite config has changed
+17:31:08 [types] Generated 1ms
+17:31:08 [vite] Re-optimizing dependencies because vite config has changed
+17:31:08 [vite] Re-optimizing dependencies because vite config has changed
+ astro  v6.3.6 ready in 9298 ms
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+17:31:08 watching for file changes...
+^C23:36:15 [vite]   ➜  Tunnel closed
+tracyalanevans@Tracys-MacBook-Pro rltmusicandfilmworks-site % nano src/pages/store.astro
+
+  UW PICO 5.09                                                                                               File: src/pages/store.astro                                                                                               Modified  
+
+
+        <div class="download-button">
+
+          <div class="funk-title">
+            THE FUNK STRUT
+          </div>
+
+          <a
+            href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
+            class="download-btn"
+          >
+            DOWNLOAD NOW • $4.99
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+          >
+            DOWNLOAD NOW • $4.99
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </body>
+</html>

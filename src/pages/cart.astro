@@ -1,0 +1,480 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <title>OZONE Cart</title>
+
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body{
+        width:100%;
+        overflow-x:hidden;
+      }
+
+      body {
+        background: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow: hidden;
+        color: white;
+      }
+
+      .cart-page {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* HERO IMAGE */
+
+      .hero-image {
+        position: absolute;
+
+        top:50%;
+        left:50%;
+
+        transform:translate(-50%, -50%);
+
+        width:96%;
+        height:96%;
+
+        object-fit: contain;
+
+        z-index: 1;
+
+        opacity: 0.92;
+
+        pointer-events:none;
+      }
+
+      /* OVERLAY */
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.55)
+          );
+
+        z-index: 2;
+
+        pointer-events:none;
+      }
+
+      /* UNDER CONSTRUCTION */
+
+      .construction-banner {
+        position: absolute;
+
+        top: 48%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        z-index: 95;
+
+        padding: 24px 46px;
+
+        border-radius: 24px;
+
+        background: rgba(0,0,0,0.58);
+
+        border: 1px solid rgba(212,175,55,0.35);
+
+        backdrop-filter: blur(12px);
+
+        color: #d4af37;
+
+        font-size: 42px;
+        font-weight: bold;
+
+        letter-spacing: 6px;
+
+        text-shadow:
+          0 0 18px rgba(212,175,55,0.55);
+
+        box-shadow:
+          0 0 30px rgba(0,0,0,0.45);
+      }
+
+      /* TOP NAV */
+
+      .top-nav {
+        position: absolute;
+
+        top: 18px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 48px;
+
+        padding: 14px 34px;
+
+        background: rgba(0,0,0,0.18);
+
+        border: 1px solid rgba(255,255,255,0.06);
+
+        border-radius: 18px;
+
+        backdrop-filter: blur(10px);
+
+        z-index: 99999;
+
+        pointer-events:auto;
+      }
+
+      .top-nav a {
+        color: #d4af37;
+
+        text-decoration: none;
+
+        font-size: 20px;
+        font-weight: bold;
+
+        letter-spacing: 3px;
+
+        transition: 0.3s ease;
+      }
+
+      .top-nav a:hover {
+        color: white;
+      }
+
+      /* ACTIVE CART LINK */
+
+      .top-nav .active {
+        color: white;
+      }
+
+      /* DOWNLOAD BUTTON */
+
+      .download-button {
+        position: absolute;
+
+        top: 18px;
+        right: 3%;
+
+        z-index: 99999;
+
+        pointer-events:auto;
+      }
+
+      .download-button a {
+        display: inline-block;
+
+        padding: 16px 34px;
+
+        border-radius: 16px;
+
+        background: #d4af37;
+
+        color: #000;
+
+        text-decoration: none;
+
+        font-size: 18px;
+        font-weight: bold;
+
+        letter-spacing: 2px;
+
+        box-shadow:
+          0 0 24px rgba(212,175,55,0.45);
+
+        transition: 0.3s ease;
+      }
+
+      .download-button a:hover {
+        transform: scale(1.03);
+
+        box-shadow:
+          0 0 34px rgba(212,175,55,0.75);
+      }
+
+      /* COMING SOON SECTION */
+
+      .coming-soon {
+        position: absolute;
+
+        bottom: 10%;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        display: flex;
+
+        gap: 28px;
+
+        z-index: 90;
+      }
+
+      .coming-card {
+        width: 220px;
+
+        padding: 22px 18px;
+
+        text-align: center;
+
+        border-radius: 22px;
+
+        background: rgba(0,0,0,0.45);
+
+        border: 1px solid rgba(212,175,55,0.28);
+
+        backdrop-filter: blur(10px);
+
+        box-shadow:
+          0 0 20px rgba(0,0,0,0.35);
+      }
+
+      .coming-card h2 {
+        color: #d4af37;
+
+        font-size: 24px;
+
+        letter-spacing: 3px;
+
+        margin-bottom: 12px;
+      }
+
+      .coming-card p {
+        color: white;
+
+        font-size: 14px;
+
+        letter-spacing: 2px;
+      }
+
+      /* COPYRIGHT */
+
+      .copyright {
+        position: absolute;
+
+        bottom: 18px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        color: rgba(255,255,255,0.85);
+
+        font-size: 15px;
+
+        letter-spacing: 1px;
+
+        z-index: 100;
+      }
+
+      /* MOBILE PORTRAIT ONLY */
+
+      @media screen and (max-width:768px) and (orientation:portrait) {
+
+        .hero-image{
+
+          width:96vw;
+          height:86vh;
+
+          top:46%;
+
+          left:50%;
+
+          transform:translate(-50%, -50%);
+        }
+
+        .construction-banner {
+
+          width: 90%;
+
+          text-align: center;
+
+          font-size: 24px;
+
+          letter-spacing: 3px;
+
+          padding: 20px;
+        }
+
+        .top-nav {
+
+          top:12px;
+
+          gap: 18px;
+
+          padding: 12px 18px;
+        }
+
+        .top-nav a {
+
+          font-size: 13px;
+
+          letter-spacing: 2px;
+        }
+
+        /* DOWNLOAD BUTTON - 2ND ROW CENTERED */
+
+        .download-button {
+
+          top: 58px;
+
+          left: 50%;
+
+          right: auto;
+
+          bottom: auto;
+
+          transform: translateX(-50%);
+        }
+
+        .download-button a {
+
+          font-size: 11px;
+
+          padding: 10px 16px;
+
+          letter-spacing: 1px;
+
+          border-radius: 12px;
+        }
+
+        .coming-soon {
+
+          flex-direction: column;
+
+          bottom: 8%;
+
+          gap: 14px;
+        }
+
+        .coming-card {
+
+          width: 240px;
+        }
+
+        .copyright {
+
+          font-size: 11px;
+
+          width: 100%;
+
+          text-align: center;
+        }
+
+      }
+
+      /* MOBILE LANDSCAPE ONLY */
+
+      @media screen and (max-width:950px) and (orientation:landscape){
+
+        .download-button a{
+
+          font-size:9px;
+
+          padding:6px 10px;
+
+          border-radius:10px;
+
+          letter-spacing:1px;
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="cart-page">
+
+      <!-- HERO IMAGE -->
+
+      <img
+        src="/images/hero/logos/Ozone-cart.png"
+        alt="OZONE Cart"
+        class="hero-image"
+      />
+
+      <!-- OVERLAY -->
+
+      <div class="overlay"></div>
+
+      <!-- UNDER CONSTRUCTION -->
+
+      <div class="construction-banner">
+        UNDER CONSTRUCTION
+      </div>
+
+      <!-- TOP NAVIGATION -->
+
+      <nav class="top-nav">
+        <a href="/">HOME</a>
+        <a href="/store">STORE</a>
+        <a href="/cart" class="active">CART</a>
+      </nav>
+
+      <!-- DOWNLOAD BUTTON -->
+
+      <div class="download-button">
+        <a
+          href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
+          target="_blank"
+        >
+          DOWNLOAD NOW • $4.99
+        </a>
+      </div>
+
+      <!-- COMING SOON -->
+
+      <div class="coming-soon">
+
+        <div class="coming-card">
+          <h2>CDs</h2>
+          <p>COMING SOON</p>
+        </div>
+
+        <div class="coming-card">
+          <h2>VINYL</h2>
+          <p>COMING SOON</p>
+        </div>
+
+        <div class="coming-card">
+          <h2>MERCHANDISE</h2>
+          <p>COMING SOON</p>
+        </div>
+
+      </div>
+
+      <!-- COPYRIGHT -->
+
+      <div class="copyright">
+        © 2026 RLT Music & Filmworks. All Rights Reserved.
+      </div>
+
+    </div>
+
+  </body>
+</html>

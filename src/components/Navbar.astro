@@ -1,0 +1,69 @@
+<header class="site-header">
+  <div class="logo">
+    RLT Music & Film Works
+  </div>
+
+  <nav class="nav-links">
+    <a href="/">HOME</a>
+    <a href="/music">MUSIC</a>
+    <a href="/films">FILMS</a>
+    <a href="/store">STORE</a>
+    <a href="/contacts">CONTACT</a>
+    <a href="/cart">CART</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.85);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo {
+    color: gold;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: gold;
+  }
+
+  @media (max-width: 768px) {
+    .site-header {
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .nav-links {
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .logo {
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,222 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RLT Music & Filmworks</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+        background: black;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        color: white;
+      }
+
+      .container {
+        width: 100%;
+        position: relative;
+      }
+
+      /* HERO IMAGE */
+
+      .hero-image {
+        width: 100%;
+        display: block;
+
+        filter:
+          brightness(1.15)
+          contrast(1.08)
+          saturate(1.08);
+      }
+
+      /* TOP NAVIGATION */
+
+      .top-nav {
+        position: absolute;
+        top: 2%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 95%;
+
+        display: flex;
+        justify-content: center;
+        gap: 28px;
+        flex-wrap: wrap;
+
+        z-index: 20;
+      }
+
+      .top-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+
+        padding: 10px 14px;
+
+        background: transparent;
+        border-radius: 10px;
+
+        transition: 0.3s ease;
+
+        text-shadow:
+          0 0 10px rgba(0,0,0,0.9),
+          0 0 20px rgba(0,0,0,0.9);
+      }
+
+      /* TAGLINE REMOVED */
+
+      .tagline {
+        display: none;
+      }
+
+      /* FEATURE IMAGE SECTION */
+
+      .image-section {
+        width: 100%;
+        padding: 20px;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+
+        background: black;
+      }
+
+      .image-section img {
+        width: 100%;
+        border-radius: 18px;
+
+        display: block;
+
+        filter:
+          brightness(1.75)
+          contrast(1.12)
+          saturate(1.22)
+          drop-shadow(0 0 25px rgba(140,200,255,0.45));
+
+        opacity: 1;
+
+        transition: 0.3s ease;
+      }
+
+      .image-section img:hover {
+        transform: scale(1.02);
+      }
+
+      /* FOOTER */
+
+      .footer {
+        width: 100%;
+        text-align: center;
+
+        padding: 40px 20px;
+
+        background: #050505;
+
+        color: #9e9e9e;
+
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 768px) {
+        .top-nav {
+          gap: 10px;
+          top: 1%;
+        }
+
+        .top-nav a {
+          font-size: 0.75rem;
+          padding: 8px 10px;
+        }
+
+        .image-section {
+          grid-template-columns: 1fr;
+          padding: 10px;
+        }
+
+        .image-section img {
+          border-radius: 12px;
+        }
+      }
+
+      /* TABLET */
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .top-nav a {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- NAVIGATION -->
+
+      <nav class="top-nav">
+        <a href="/">HOME</a>
+        <a href="/music">MUSIC</a>
+        <a href="/film">FILM</a>
+        <a href="/store">STORE</a>
+        <a href="/contact">CONTACT</a>
+      </nav>
+
+      <!-- HERO IMAGE -->
+
+      <img
+        src="/images/homepage.png"
+        alt="RLT Homepage"
+        class="hero-image"
+      />
+
+      <!-- FEATURED IMAGE SECTION -->
+
+      <section class="image-section">
+
+        <a href="/music">
+          <img
+            src="/images/music.png"
+            alt="Music"
+          />
+        </a>
+
+        <a href="/film">
+          <img
+            src="/images/film.png"
+            alt="Film"
+          />
+        </a>
+
+      </section>
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+        © 2026 RLT Music & Filmworks
+      </footer>
+
+    </div>
+  </body>
+</html>

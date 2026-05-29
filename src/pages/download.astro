@@ -1,0 +1,490 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>
+      Download – OZONE The Funk Strut
+    </title>
+
+    <style>
+
+      *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+      }
+
+      body{
+        font-family:Arial, Helvetica, sans-serif;
+        min-height:100vh;
+        overflow:hidden;
+        position:relative;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#000;
+      }
+
+      .bg{
+        position:fixed;
+        inset:0;
+
+        background-image:
+          linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.75)
+          ),
+          url('/images/hero/rlt-homepage-hero-master.png');
+
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+
+        z-index:1;
+      }
+
+      .download-box{
+        position:relative;
+        z-index:5;
+
+        width:90%;
+        max-width:760px;
+
+        padding:70px 60px;
+
+        border-radius:28px;
+
+        background:rgba(0,0,0,0.58);
+
+        border:1px solid rgba(255,215,0,0.25);
+
+        backdrop-filter:blur(10px);
+
+        text-align:center;
+
+        box-shadow:
+          0 0 30px rgba(0,0,0,0.45),
+          0 0 40px rgba(255,215,0,0.15);
+      }
+
+      h1{
+        color:#ffd700;
+
+        font-size:3.2rem;
+
+        margin-bottom:25px;
+
+        letter-spacing:2px;
+      }
+
+      p{
+        color:#fff;
+
+        font-size:1.15rem;
+
+        line-height:1.8;
+
+        margin-bottom:45px;
+      }
+
+      .download-btn{
+        display:inline-block;
+
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #ffb700
+          );
+
+        color:#000;
+
+        text-decoration:none;
+
+        padding:22px 55px;
+
+        border-radius:60px;
+
+        font-size:1.15rem;
+        font-weight:700;
+
+        letter-spacing:1px;
+
+        transition:.3s ease;
+
+        box-shadow:
+          0 0 25px rgba(255,215,0,0.35);
+
+        cursor:pointer;
+      }
+
+      .download-btn:hover{
+        transform:scale(1.04);
+
+        box-shadow:
+          0 0 35px rgba(255,215,0,0.55);
+      }
+
+      .download-btn.disabled{
+        opacity:0.65;
+
+        pointer-events:none;
+      }
+
+      .status-message{
+        margin-top:22px;
+
+        color:#ffd700;
+
+        font-size:0.95rem;
+
+        opacity:0;
+
+        transition:opacity .3s ease;
+      }
+
+      .status-message.show{
+        opacity:1;
+      }
+
+      .footer{
+        margin-top:45px;
+
+        color:#ccc;
+
+        font-size:.95rem;
+
+        line-height:1.9;
+      }
+
+      @media(max-width:768px){
+
+        .download-box{
+          padding:50px 28px;
+        }
+
+        h1{
+          font-size:2.2rem;
+        }
+
+        p{
+          font-size:1rem;
+        }
+
+        .download-btn{
+          width:100%;
+
+          padding:20px;
+        }
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="bg"></div>
+
+    <div class="download-box">
+
+      <h1>
+        DOWNLOAD READY
+      </h1>
+
+      <p>
+        Thank you for supporting
+        OZONE and RLT Music &
+        Film Works.
+
+        Your purchase is complete
+        and your download is now
+        ready.
+
+        Click below to instantly
+        download
+        <strong>
+          “The Funk Strut”
+        </strong>.
+      </p>
+
+      <a
+        id="downloadButton"
+        href="/api/download/The-Funk-Strut.zip"
+        download="The-Funk-Strut.zip"
+        class="download-btn"
+      >
+        DOWNLOAD NOW
+      </a>
+
+      <div
+        id="statusMessage"
+        class="status-message"
+      >
+        Your download has started.
+      </div>
+
+      <div class="footer">
+
+        Licensed Download
+        Reference:
+        RLT-FUNK-STRUT
+
+        <br />
+
+        Maximum Downloads Allowed:
+        3
+
+        <br /><br />
+
+        Download limit reached.
+        Please contact customer
+        support for assistance.
+
+        <br /><br />
+
+        Download access expires
+        after 24 hours.
+
+        <br /><br />
+
+        &copy; 2026 RLT Music & Film Works 
+        
+
+        <br />
+
+        All Rights Reserved.
+
+      </div>
+
+    </div>
+
+    <script>
+
+      const downloadButton =
+        document.getElementById(
+          'downloadButton'
+        );
+
+      const statusMessage =
+        document.getElementById(
+          'statusMessage'
+        );
+
+      const downloadKey =
+        'the-funk-strut-download-count';
+
+      const expirationKey =
+        'the-funk-strut-download-created';
+
+      const MAX_DOWNLOADS = 3;
+
+      const EXPIRATION_HOURS = 24;
+
+      const EXPIRATION_MS =
+        EXPIRATION_HOURS *
+        60 *
+        60 *
+        1000;
+
+      let createdTime =
+        localStorage.getItem(
+          expirationKey
+        );
+
+      // CREATE FIRST DOWNLOAD RECORD
+
+      if(!createdTime){
+
+        createdTime =
+          Date.now();
+
+        localStorage.setItem(
+          expirationKey,
+          createdTime
+        );
+
+      }
+
+      // CHECK EXPIRATION
+
+      const expired =
+
+        Date.now() -
+
+        parseInt(createdTime)
+
+        >
+
+        EXPIRATION_MS;
+
+      let currentCount =
+
+        parseInt(
+
+          localStorage.getItem(
+            downloadKey
+          ) || '0'
+
+        );
+
+      function markExpired(message){
+
+        downloadButton.classList.add(
+          'disabled'
+        );
+
+        downloadButton.style.pointerEvents =
+          'none';
+
+        downloadButton.textContent =
+          'DOWNLOAD UNAVAILABLE';
+
+        downloadButton.removeAttribute(
+          'href'
+        );
+
+        statusMessage.textContent =
+          message;
+
+        statusMessage.classList.add(
+          'show'
+        );
+
+      }
+
+      // TOKEN EXPIRED
+
+      if(expired){
+
+        markExpired(
+
+          'Your secure download window has expired.'
+
+        );
+
+      }
+
+      // DOWNLOAD LIMIT REACHED
+
+      else if(
+
+        currentCount >=
+        MAX_DOWNLOADS
+
+      ){
+
+        markExpired(
+
+          'Download limit reached. Please contact customer support for assistance.'
+
+        );
+
+      }
+
+      // HANDLE DOWNLOAD
+
+      downloadButton.addEventListener(
+
+        'click',
+
+        (e) => {
+
+          e.preventDefault();
+
+          currentCount =
+
+            parseInt(
+
+              localStorage.getItem(
+                downloadKey
+              ) || '0'
+
+            );
+
+          if(
+
+            currentCount >=
+            MAX_DOWNLOADS
+
+          ){
+
+            markExpired(
+
+              'Download limit reached. Please contact customer support for assistance.'
+
+            );
+
+            return;
+
+          }
+
+          currentCount++;
+
+          localStorage.setItem(
+
+            downloadKey,
+
+            currentCount
+
+          );
+
+          downloadButton.classList.add(
+            'disabled'
+          );
+
+          downloadButton.style.pointerEvents =
+            'none';
+
+          downloadButton.textContent =
+            'DOWNLOAD STARTED';
+
+          statusMessage.textContent =
+
+            `Download ${currentCount} of ${MAX_DOWNLOADS} started successfully. You will return to the homepage shortly.`;
+
+          statusMessage.classList.add(
+            'show'
+          );
+
+          const link =
+
+            document.createElement('a');
+
+          link.href =
+
+            '/api/download/The-Funk-Strut.zip';
+
+          link.download =
+
+            'The-Funk-Strut.zip';
+
+          document.body.appendChild(
+            link
+          );
+
+          link.click();
+
+          document.body.removeChild(
+            link
+          );
+
+          setTimeout(() => {
+
+            window.location.href = '/';
+
+          }, 4000);
+
+        }
+
+      );
+
+    </script>
+
+  </body>
+</html>

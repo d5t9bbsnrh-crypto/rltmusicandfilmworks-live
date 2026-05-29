@@ -1,0 +1,414 @@
+---
+import Navbar from "../components/Navbar.astro";
+const audioSrc = "/audio/the-funk-strut-preview.mp3";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RLT Music & Film Works</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+        font-family: Georgia, "Times New Roman", serif;
+        background: #000;
+        color: #fff;
+      }
+
+      body {
+        position: relative;
+      }
+
+      .page {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* BLACK BACKGROUND */
+
+      .hero-bg {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 0;
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        width: 100%;
+        padding: 26px 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,.18);
+      }
+
+      .top-nav {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+      }
+
+      .top-nav a,
+      .footer-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        transition:
+          color .25s ease,
+          text-shadow .25s ease;
+      }
+
+      .top-nav a:hover,
+      .footer-nav a:hover {
+        color: #ffdfdf;
+        text-shadow: 0 0 12px rgba(255,65,65,.8);
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 24px;
+      }
+
+      .hero {
+        width: min(1400px, 96vw);
+      }
+
+      /* HERO LAYOUT */
+
+      .hero-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: nowrap;
+      }
+
+      .hero-img-wrap {
+        width: min(980px, 78vw);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid rgba(255,255,255,.16);
+        background: rgba(0,0,0,.45);
+        box-shadow: 0 0 35px rgba(255,255,255,.08);
+      }
+
+      .hero-img-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .side-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-left: -6px;
+      }
+
+      .buy-btn,
+      .listen-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 260px;
+        padding: 20px 32px;
+        border-radius: 999px;
+        border: 2px solid #fff;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          transform .25s ease,
+          box-shadow .25s ease;
+      }
+
+      .buy-btn {
+        background: linear-gradient(
+          180deg,
+          #ff1a1a 0%,
+          #b30000 35%,
+          #1a0000 72%,
+          #000000 100%
+        );
+
+        border: 2px solid rgba(255,255,255,.95);
+
+        color: #fff;
+
+        box-shadow:
+          0 0 12px rgba(255,0,0,.75),
+          0 0 28px rgba(255,0,0,.95),
+          0 0 50px rgba(0,0,0,.95),
+          inset 0 2px 10px rgba(255,255,255,.25),
+          inset 0 -10px 18px rgba(0,0,0,.75);
+
+        position: relative;
+        overflow: hidden;
+
+        animation: blackRedFlash 1s infinite alternate;
+      }
+
+      @keyframes blackRedFlash {
+
+        0% {
+          background: linear-gradient(
+            180deg,
+            #ff1a1a 0%,
+            #8b0000 45%,
+            #140000 75%,
+            #000000 100%
+          );
+
+          box-shadow:
+            0 0 8px rgba(255,0,0,.55),
+            0 0 18px rgba(255,0,0,.65),
+            0 0 34px rgba(0,0,0,.95);
+
+          transform: scale(1);
+        }
+
+        100% {
+          background: linear-gradient(
+            180deg,
+            #ff4d4d 0%,
+            #ff0000 38%,
+            #300000 72%,
+            #000000 100%
+          );
+
+          box-shadow:
+            0 0 18px rgba(255,255,255,.55),
+            0 0 34px rgba(255,0,0,1),
+            0 0 70px rgba(255,0,0,.95),
+            0 0 90px rgba(0,0,0,1);
+
+          transform: scale(1.05);
+        }
+      }
+
+      .listen-btn {
+        background: rgba(255,255,255,.08);
+        backdrop-filter: blur(6px);
+        box-shadow:
+          0 0 18px rgba(255,255,255,.25),
+          inset 0 0 12px rgba(255,255,255,.08);
+      }
+
+      .buy-btn:hover,
+      .listen-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+
+        box-shadow:
+          0 0 18px rgba(255,255,255,.85),
+          0 0 34px rgba(255,0,0,.95),
+          0 0 55px rgba(255,40,40,.75);
+      }
+
+      .audio-player {
+        margin-top: 8px;
+        display: none;
+      }
+
+      .audio-player audio {
+        width: min(320px, 90vw);
+      }
+
+      footer {
+        padding: 26px 24px 30px;
+        border-top: 1px solid rgba(255,255,255,.18);
+        text-align: center;
+      }
+
+      .footer-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+
+      footer p {
+        color: rgba(255,255,255,.7);
+        font-size: .95rem;
+        letter-spacing: .03em;
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 900px) {
+
+        .hero-layout {
+          flex-direction: column;
+          gap: 28px;
+        }
+
+        .hero-img-wrap {
+          width: 96vw;
+        }
+
+        .side-buttons {
+          width: 100%;
+          margin-left: 0;
+        }
+
+        .buy-btn,
+        .listen-btn {
+          width: 100%;
+          max-width: 340px;
+          font-size: 1rem;
+        }
+
+        header {
+          padding: 18px 20px;
+        }
+
+        .top-nav {
+          gap: 24px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        main {
+          padding-top: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="page">
+
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="content">
+
+        <header>
+
+          <nav class="top-nav" aria-label="Main navigation">
+            <a href="/">HOME</a>
+            <a href="/store">STORE</a>
+            <a href="/cart">CART</a>
+          </nav>
+
+        </header>
+
+        <main>
+
+          <section class="hero">
+
+            <div class="hero-layout">
+
+              <div class="hero-img-wrap">
+                <img
+                  src="/images/hero/rlt-homepage-hero-master.png"
+                  alt="RLT Music & Film Works"
+                />
+              </div>
+
+              <div class="side-buttons">
+
+                <button
+                  class="listen-btn"
+                  id="listenButton"
+                  type="button"
+                >
+                  ♫ LISTEN TO ♫
+                </button>
+
+                <div class="audio-player" id="audioPlayer">
+                  <audio controls>
+                    <source src={audioSrc} type="audio/mpeg" />
+                  </audio>
+                </div>
+
+                <a
+                  class="buy-btn"
+                  href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
+                >
+                  BUY NOW
+                </a>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </main>
+
+        <footer>
+
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="/">HOME</a>
+            <a href="/store">STORE</a>
+            <a href="/cart">CART</a>
+          </nav>
+
+          <p>
+            © 2026 RLT Music &amp; Film Works.
+            All Rights Reserved.
+          </p>
+
+        </footer>
+
+      </div>
+
+    </div>
+
+    <script>
+      const listenButton = document.getElementById("listenButton");
+      const audioPlayer = document.getElementById("audioPlayer");
+
+      if (listenButton && audioPlayer) {
+        listenButton.addEventListener("click", () => {
+          audioPlayer.style.display = "block";
+
+          const audio = audioPlayer.querySelector("audio");
+
+          if (audio) {
+            audio.play();
+          }
+        });
+      }
+    </script>
+
+  </body>
+</html>
