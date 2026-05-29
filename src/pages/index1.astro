@@ -40,8 +40,6 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         background: #000;
       }
 
-      /* BLACK BACKGROUND */
-
       .hero-bg {
         position: fixed;
         inset: 0;
@@ -102,8 +100,6 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
       .hero {
         width: min(1400px, 96vw);
       }
-
-      /* HERO LAYOUT */
 
       .hero-layout {
         display: flex;
@@ -270,7 +266,66 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         letter-spacing: .03em;
       }
 
-      /* MOBILE */
+      /* DOWNLOAD SCREEN */
+
+      #download-screen {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.96);
+        z-index: 9999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .download-box {
+        max-width: 520px;
+      }
+
+      .download-box h1 {
+        color: gold;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      .download-text {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .small-text {
+        opacity: .82;
+        margin-bottom: 30px;
+      }
+
+      .loader {
+        width: 60px;
+        height: 60px;
+        border: 6px solid #444;
+        border-top: 6px solid gold;
+        border-radius: 50%;
+        margin: 20px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      #manual-download {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 24px;
+        background: gold;
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       @media (max-width: 900px) {
 
@@ -393,21 +448,128 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
     </div>
 
+    <!-- DOWNLOAD SCREEN -->
+
+    <div id="download-screen">
+      <div class="download-box">
+
+        <h1>Thank You For Your Purchase</h1>
+
+        <p class="download-text">
+          Your download is now starting...
+        </p>
+
+        <p class="small-text">
+          Please wait while your ZIP file prepares for download.
+        </p>
+
+        <div class="loader"></div>
+
+        <a
+          id="manual-download"
+          href="/downloads/The-Funk-Strut.zip"
+          download
+        >
+          Tap Here If Download Does Not Start
+        </a>
+
+      </div>
+    </div>
+
     <script>
       const listenButton = document.getElementById("listenButton");
       const audioPlayer = document.getElementById("audioPlayer");
 
       if (listenButton && audioPlayer) {
+
         listenButton.addEventListener("click", () => {
+
           audioPlayer.style.display = "block";
 
-          const audio = audioPlayer.querySelector("audio");
+          const audio =
+            audioPlayer.querySelector("audio");
 
           if (audio) {
             audio.play();
           }
+
         });
+
       }
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+          const buyButtons =
+            document.querySelectorAll(
+              'a[href*="stripe.com"]'
+            );
+
+          buyButtons.forEach((button) => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                sessionStorage.setItem(
+                  "rltDownloadPending",
+                  "true"
+                );
+
+              }
+            );
+
+          });
+
+          const params =
+            new URLSearchParams(
+              window.location.search
+            );
+
+          if (
+            params.get("download") === "true" ||
+            sessionStorage.getItem(
+              "rltDownloadPending"
+            ) === "true"
+          ) {
+
+            const screen =
+              document.getElementById(
+                "download-screen"
+              );
+
+            if (screen) {
+              screen.style.display = "flex";
+            }
+
+            setTimeout(() => {
+
+              const link =
+                document.createElement("a");
+
+              link.href =
+                "/downloads/The-Funk-Strut.zip";
+
+              link.download =
+                "The-Funk-Strut.zip";
+
+              document.body.appendChild(link);
+
+              link.click();
+
+              document.body.removeChild(link);
+
+              sessionStorage.removeItem(
+                "rltDownloadPending"
+              );
+
+            }, 5000);
+
+          }
+
+        }
+      );
     </script>
 
   </body>

@@ -1,12 +1,17 @@
 ---
 import Navbar from "../components/Navbar.astro";
-const audioSrc = "/audio/the-funk-strut-preview.mp3";
+
+const audioSrc =
+  "/audio/the-funk-strut-preview.mp3";
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
     <title>RLT Music & Film Works</title>
 
@@ -39,8 +44,6 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         overflow: hidden;
         background: #000;
       }
-
-      /* BLACK BACKGROUND */
 
       .hero-bg {
         position: fixed;
@@ -88,7 +91,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
       .top-nav a:hover,
       .footer-nav a:hover {
         color: #ffdfdf;
-        text-shadow: 0 0 12px rgba(255,65,65,.8);
+        text-shadow:
+          0 0 12px rgba(255,65,65,.8);
       }
 
       main {
@@ -102,8 +106,6 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
       .hero {
         width: min(1400px, 96vw);
       }
-
-      /* HERO LAYOUT */
 
       .hero-layout {
         display: flex;
@@ -119,7 +121,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         overflow: hidden;
         border: 2px solid rgba(255,255,255,.16);
         background: rgba(0,0,0,.45);
-        box-shadow: 0 0 35px rgba(255,255,255,.08);
+        box-shadow:
+          0 0 35px rgba(255,255,255,.08);
       }
 
       .hero-img-wrap img {
@@ -167,7 +170,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
           #000000 100%
         );
 
-        border: 2px solid rgba(255,255,255,.95);
+        border:
+          2px solid rgba(255,255,255,.95);
 
         color: #fff;
 
@@ -181,7 +185,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         position: relative;
         overflow: hidden;
 
-        animation: blackRedFlash 1s infinite alternate;
+        animation:
+          blackRedFlash 1s infinite alternate;
       }
 
       @keyframes blackRedFlash {
@@ -223,8 +228,11 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
       }
 
       .listen-btn {
-        background: rgba(255,255,255,.08);
+        background:
+          rgba(255,255,255,.08);
+
         backdrop-filter: blur(6px);
+
         box-shadow:
           0 0 18px rgba(255,255,255,.25),
           inset 0 0 12px rgba(255,255,255,.08);
@@ -232,7 +240,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
       .buy-btn:hover,
       .listen-btn:hover {
-        transform: translateY(-3px) scale(1.03);
+        transform:
+          translateY(-3px) scale(1.03);
 
         box-shadow:
           0 0 18px rgba(255,255,255,.85),
@@ -251,7 +260,8 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
       footer {
         padding: 26px 24px 30px;
-        border-top: 1px solid rgba(255,255,255,.18);
+        border-top:
+          1px solid rgba(255,255,255,.18);
         text-align: center;
       }
 
@@ -270,7 +280,67 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
         letter-spacing: .03em;
       }
 
-      /* MOBILE */
+      /* DOWNLOAD SCREEN */
+
+      #download-screen {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.96);
+        z-index: 9999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        transition: opacity .6s ease;
+      }
+
+      .download-box {
+        max-width: 520px;
+      }
+
+      .download-box h1 {
+        color: gold;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      .download-text {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .small-text {
+        opacity: .82;
+        margin-bottom: 30px;
+      }
+
+      .loader {
+        width: 60px;
+        height: 60px;
+        border: 6px solid #444;
+        border-top: 6px solid gold;
+        border-radius: 50%;
+        margin: 20px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      #manual-download {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 24px;
+        background: gold;
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       @media (max-width: 900px) {
 
@@ -322,7 +392,10 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
         <header>
 
-          <nav class="top-nav" aria-label="Main navigation">
+          <nav
+            class="top-nav"
+            aria-label="Main navigation"
+          >
             <a href="/">HOME</a>
             <a href="/store">STORE</a>
             <a href="/cart">CART</a>
@@ -353,9 +426,15 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
                   ♫ LISTEN TO ♫
                 </button>
 
-                <div class="audio-player" id="audioPlayer">
+                <div
+                  class="audio-player"
+                  id="audioPlayer"
+                >
                   <audio controls>
-                    <source src={audioSrc} type="audio/mpeg" />
+                    <source
+                      src={audioSrc}
+                      type="audio/mpeg"
+                    />
                   </audio>
                 </div>
 
@@ -376,14 +455,18 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
         <footer>
 
-          <nav class="footer-nav" aria-label="Footer navigation">
+          <nav
+            class="footer-nav"
+            aria-label="Footer navigation"
+          >
             <a href="/">HOME</a>
             <a href="/store">STORE</a>
             <a href="/cart">CART</a>
           </nav>
 
           <p>
-            © 2026 RLT Music &amp; Film Works.
+            © 2026 RLT Music &amp;
+            Film Works.
             All Rights Reserved.
           </p>
 
@@ -393,21 +476,176 @@ const audioSrc = "/audio/the-funk-strut-preview.mp3";
 
     </div>
 
+    <!-- DOWNLOAD SCREEN -->
+
+    <div id="download-screen">
+
+      <div class="download-box">
+
+        <h1>
+          Thank You For Your Purchase
+        </h1>
+
+        <p class="download-text">
+          Your download is now starting...
+        </p>
+
+        <p class="small-text">
+          Please wait while your ZIP file
+          prepares for download.
+        </p>
+
+        <div class="loader"></div>
+
+        <a
+          id="manual-download"
+          href="/downloads/The-Funk-Strut.zip"
+          download
+        >
+          Tap Here If Download Does
+          Not Start
+        </a>
+
+      </div>
+
+    </div>
+
     <script>
-      const listenButton = document.getElementById("listenButton");
-      const audioPlayer = document.getElementById("audioPlayer");
+      const listenButton =
+        document.getElementById(
+          "listenButton"
+        );
 
-      if (listenButton && audioPlayer) {
-        listenButton.addEventListener("click", () => {
-          audioPlayer.style.display = "block";
+      const audioPlayer =
+        document.getElementById(
+          "audioPlayer"
+        );
 
-          const audio = audioPlayer.querySelector("audio");
+      if (
+        listenButton &&
+        audioPlayer
+      ) {
 
-          if (audio) {
-            audio.play();
+        listenButton.addEventListener(
+          "click",
+          () => {
+
+            audioPlayer.style.display =
+              "block";
+
+            const audio =
+              audioPlayer.querySelector(
+                "audio"
+              );
+
+            if (audio) {
+              audio.play();
+            }
+
           }
-        });
+        );
+
       }
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+          const buyButtons =
+            document.querySelectorAll(
+              'a[href*="stripe.com"]'
+            );
+
+          buyButtons.forEach(
+            (button) => {
+
+              button.addEventListener(
+                "click",
+                () => {
+
+                  sessionStorage.setItem(
+                    "rltDownloadPending",
+                    "true"
+                  );
+
+                }
+              );
+
+            }
+          );
+
+          const params =
+            new URLSearchParams(
+              window.location.search
+            );
+
+          if (
+            params.get("download") === "true" ||
+            sessionStorage.getItem(
+              "rltDownloadPending"
+            ) === "true"
+          ) {
+
+            const screen =
+              document.getElementById(
+                "download-screen"
+              );
+
+            if (screen) {
+              screen.style.display =
+                "flex";
+            }
+
+            setTimeout(() => {
+
+              const link =
+                document.createElement(
+                  "a"
+                );
+
+              link.href =
+                "/downloads/The-Funk-Strut.zip";
+
+              link.download =
+                "The-Funk-Strut.zip";
+
+              document.body.appendChild(
+                link
+              );
+
+              link.click();
+
+              document.body.removeChild(
+                link
+              );
+
+              sessionStorage.removeItem(
+                "rltDownloadPending"
+              );
+
+              if (screen) {
+
+                screen.style.opacity =
+                  "0";
+
+                setTimeout(() => {
+
+                  screen.style.display =
+                    "none";
+
+                  screen.style.opacity =
+                    "1";
+
+                }, 600);
+
+              }
+
+            }, 5000);
+
+          }
+
+        }
+      );
     </script>
 
   </body>
