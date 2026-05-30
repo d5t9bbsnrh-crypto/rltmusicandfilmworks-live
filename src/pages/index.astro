@@ -8,6 +8,7 @@ const audioSrc =
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
@@ -91,6 +92,7 @@ const audioSrc =
       .top-nav a:hover,
       .footer-nav a:hover {
         color: #ffdfdf;
+
         text-shadow:
           0 0 12px rgba(255,65,65,.8);
       }
@@ -121,6 +123,7 @@ const audioSrc =
         overflow: hidden;
         border: 2px solid rgba(255,255,255,.16);
         background: rgba(0,0,0,.45);
+
         box-shadow:
           0 0 35px rgba(255,255,255,.08);
       }
@@ -156,6 +159,7 @@ const audioSrc =
         letter-spacing: .08em;
         text-transform: uppercase;
         cursor: pointer;
+
         transition:
           transform .25s ease,
           box-shadow .25s ease;
@@ -192,37 +196,10 @@ const audioSrc =
       @keyframes blackRedFlash {
 
         0% {
-          background: linear-gradient(
-            180deg,
-            #ff1a1a 0%,
-            #8b0000 45%,
-            #140000 75%,
-            #000000 100%
-          );
-
-          box-shadow:
-            0 0 8px rgba(255,0,0,.55),
-            0 0 18px rgba(255,0,0,.65),
-            0 0 34px rgba(0,0,0,.95);
-
           transform: scale(1);
         }
 
         100% {
-          background: linear-gradient(
-            180deg,
-            #ff4d4d 0%,
-            #ff0000 38%,
-            #300000 72%,
-            #000000 100%
-          );
-
-          box-shadow:
-            0 0 18px rgba(255,255,255,.55),
-            0 0 34px rgba(255,0,0,1),
-            0 0 70px rgba(255,0,0,.95),
-            0 0 90px rgba(0,0,0,1);
-
           transform: scale(1.05);
         }
       }
@@ -242,11 +219,6 @@ const audioSrc =
       .listen-btn:hover {
         transform:
           translateY(-3px) scale(1.03);
-
-        box-shadow:
-          0 0 18px rgba(255,255,255,.85),
-          0 0 34px rgba(255,0,0,.95),
-          0 0 55px rgba(255,40,40,.75);
       }
 
       .audio-player {
@@ -277,7 +249,6 @@ const audioSrc =
       footer p {
         color: rgba(255,255,255,.7);
         font-size: .95rem;
-        letter-spacing: .03em;
       }
 
       /* DOWNLOAD SCREEN */
@@ -292,7 +263,6 @@ const audioSrc =
         align-items: center;
         text-align: center;
         padding: 20px;
-        transition: opacity .6s ease;
       }
 
       .download-box {
@@ -334,6 +304,7 @@ const audioSrc =
         text-decoration: none;
         font-weight: bold;
         border-radius: 8px;
+        font-size: 1rem;
       }
 
       @keyframes spin {
@@ -386,19 +357,18 @@ const audioSrc =
 
     <div class="page">
 
-      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-bg"></div>
 
       <div class="content">
 
         <header>
 
-          <nav
-            class="top-nav"
-            aria-label="Main navigation"
-          >
+          <nav class="top-nav">
+
             <a href="/">HOME</a>
             <a href="/store">STORE</a>
             <a href="/cart">CART</a>
+
           </nav>
 
         </header>
@@ -410,10 +380,12 @@ const audioSrc =
             <div class="hero-layout">
 
               <div class="hero-img-wrap">
+
                 <img
                   src="/images/hero/rlt-homepage-hero-master.png"
                   alt="RLT Music & Film Works"
                 />
+
               </div>
 
               <div class="side-buttons">
@@ -430,12 +402,16 @@ const audioSrc =
                   class="audio-player"
                   id="audioPlayer"
                 >
+
                   <audio controls>
+
                     <source
                       src={audioSrc}
                       type="audio/mpeg"
                     />
+
                   </audio>
+
                 </div>
 
                 <a
@@ -455,13 +431,12 @@ const audioSrc =
 
         <footer>
 
-          <nav
-            class="footer-nav"
-            aria-label="Footer navigation"
-          >
+          <nav class="footer-nav">
+
             <a href="/">HOME</a>
             <a href="/store">STORE</a>
             <a href="/cart">CART</a>
+
           </nav>
 
           <p>
@@ -487,12 +462,11 @@ const audioSrc =
         </h1>
 
         <p class="download-text">
-          Your download is now starting...
+          Preparing your download...
         </p>
 
         <p class="small-text">
-          Please wait while your ZIP file
-          prepares for download.
+          Please wait a few seconds.
         </p>
 
         <div class="loader"></div>
@@ -502,8 +476,7 @@ const audioSrc =
           href="/downloads/The-Funk-Strut.zip"
           download
         >
-          Tap Here If Download Does
-          Not Start
+          TAP HERE TO DOWNLOAD
         </a>
 
       </div>
@@ -511,6 +484,7 @@ const audioSrc =
     </div>
 
     <script>
+
       const listenButton =
         document.getElementById(
           "listenButton"
@@ -598,45 +572,29 @@ const audioSrc =
 
             setTimeout(() => {
 
-              const link =
-                document.createElement(
-                  "a"
-                );
-
-              link.href =
-                "/downloads/The-Funk-Strut.zip";
-
-              link.download =
-                "The-Funk-Strut.zip";
-
-              document.body.appendChild(
-                link
-              );
-
-              link.click();
-
-              document.body.removeChild(
-                link
-              );
-
               sessionStorage.removeItem(
                 "rltDownloadPending"
               );
 
-              if (screen) {
+              const loader =
+                document.querySelector(
+                  ".loader"
+                );
 
-                screen.style.opacity =
-                  "0";
+              if (loader) {
+                loader.style.display =
+                  "none";
+              }
 
-                setTimeout(() => {
+              const text =
+                document.querySelector(
+                  ".download-text"
+                );
 
-                  screen.style.display =
-                    "none";
+              if (text) {
 
-                  screen.style.opacity =
-                    "1";
-
-                }, 600);
+                text.innerHTML =
+                  "Tap the button below to download your song.";
 
               }
 
@@ -646,7 +604,9 @@ const audioSrc =
 
         }
       );
+
     </script>
 
   </body>
+
 </html>
