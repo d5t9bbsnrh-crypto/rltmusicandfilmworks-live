@@ -1,0 +1,332 @@
+---
+const title = "RLT Music & Film Works Store";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>{title}</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      header {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.45;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 8%;
+      }
+
+      nav {
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+      }
+
+     nav a {
+     text-decoration: none;
+      color: #ffd700;
+
+      font-size: 0.92rem;
+
+      font-weight: 700;
+
+        letter-spacing: 2.4px;
+
+      transition: 0.3s ease;      
+      }
+         nav a:hover {
+          color: white;
+        }
+
+       nav {
+       position: absolute;
+
+        top: 18px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 10;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        gap: 42px;
+
+        width: 100%;
+     }
+.action-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  width: 256px;
+
+  min-height: 62px;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  font-size: 0.82rem;
+
+  font-weight: bold;
+
+  letter-spacing: 0.8px;
+
+  transition: 0.3s ease;
+
+  border: none;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    #b8860b,
+    #ffd700,
+    #b8860b
+  );
+
+  color: #000;
+
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.5);
+}
+
+      .action-button:hover {
+        transform: scale(1.05);
+      }
+
+      .button-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+      }
+
+      .checkout-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.96);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .checkout-overlay.active {
+        display: flex;
+      }
+
+      .checkout-overlay h2 {
+        color: gold;
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 20px;
+        text-shadow:
+          0 0 10px rgba(255, 215, 0, 0.9),
+          0 0 20px rgba(255, 215, 0, 0.6);
+      }
+
+      .checkout-overlay p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 215, 0, 0.25);
+        border-top: 5px solid gold;
+        border-radius: 50%;
+        margin: 25px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .overlay {
+          justify-content: center;
+          padding-right: 0;
+        }
+
+        .action-button {
+          width: 260px;
+          font-size: 0.95rem;
+        }
+
+        nav a {
+          margin: 0 10px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+
+      <img
+        src="/images/hero/logos/Ozone-store.png"
+        alt="Store Hero"
+        class="hero-image"
+      />
+
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/store">STORE</a>
+        <a href="/cart">CART</a>
+      </nav>
+
+      <div class="overlay">
+
+       <div class="store-container">
+
+  <div class="button-group">
+
+    <a
+      href="https://buy.stripe.com/test_eVq7sN3Shcd60aEc8gcfK02"
+      target="_blank"
+      class="action-button"
+      id="download12Button"
+    >
+      <div class="button-text">
+        <span>Download the 12" Version</span>
+        <span>of The Funk Strut</span>
+        <span>$10.99</span>
+      </div>
+    </a>
+
+    <a
+      href="https://buy.stripe.com/test_28EeVd07049Sb6e1vI9ws00"
+      target="_blank"
+      class="action-button"
+      id="downloadButton"
+    >
+      <div class="button-text">
+        <span>Download The Funk Strut</span>
+        <span>$4.99</span>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+      </div>
+
+    </header>.store-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-end;
+}
+
+    <div
+      id="checkoutOverlay"
+      class="checkout-overlay"
+    >
+      <h2>Redirecting To Secure Checkout</h2>
+
+      <div class="spinner"></div>
+
+      <p>
+        Please wait while we connect you to Stripe.
+      </p>
+    </div>
+
+    <script>
+      const overlay =
+        document.getElementById("checkoutOverlay");
+
+      const buttons = [
+        document.getElementById("downloadButton"),
+        document.getElementById("download12Button")
+      ];
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          overlay.classList.add("active");
+
+          sessionStorage.setItem(
+            "rltDownloadPending",
+            "true"
+          );
+
+          const targetUrl = this.href;
+
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 3000);
+        });
+      });
+    </script>
+
+  </body>
+</html>

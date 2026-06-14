@@ -1,0 +1,109 @@
+---
+const title = "DOWNLOAD READY";
+
+const artworkPath =
+  "/downloads/thefunkstrut12inch.png";
+
+const downloadPath =
+  "/downloads/fwdkingc_12inch.zip";
+
+const productTitle =
+  'The Funk Strut 12" Version';
+
+const maxDownloads = 3;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>{title}</title>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 600px;
+      }
+
+      img {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 14px;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        color: #d4af37;
+        margin-bottom: 30px;
+      }
+
+      .download-btn {
+        display: inline-block;
+        background: #d4af37;
+        color: #000;
+        text-decoration: none;
+        padding: 18px 34px;
+        border-radius: 10px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin-top: 25px;
+      }
+
+      .limit {
+        margin-top: 20px;
+        color: #999;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <h1>DOWNLOAD READY</h1>
+
+      <h2>{productTitle}</h2>
+
+      <img
+        src={artworkPath}
+        alt={productTitle}
+      />
+
+      <a
+        class="download-btn"
+        href={downloadPath}
+        download
+      >
+        DOWNLOAD NOW
+      </a>
+
+      <div class="limit">
+        Maximum Downloads Allowed: {maxDownloads}
+      </div>
+
+    </div>
+
+  </body>
+</html>

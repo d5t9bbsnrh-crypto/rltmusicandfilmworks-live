@@ -3,7 +3,6 @@ const pageTitle = 'The Funk Strut (Radio Version)';
 const maxDownloads = 3;
 ---
 
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -52,7 +51,7 @@ const maxDownloads = 3;
         rgba(0,0,0,0.03),
         rgba(0,0,0,0.12)
       ),
-      url('/images/hero/logos/thefunkstrut12inch.png');
+      url('/images/hero/logos/thefunkstrutradio.png');
 
     background-size: 30%;
     background-position: center center;
@@ -309,19 +308,17 @@ const maxDownloads = 3;
         <a
           id="downloadBtn"
           class="download-btn"
-          href="/downloads/The-Funk-Strut-12-inch.zip"
+          href="/downloads/The-Funk-Strut-radio.zip"
           download
         >
           DOWNLOAD NOW
         </a>
 
        <div class="limit">
-  Maximum Attempts Allowed: 3
-</div>
+          Maximum Attempts Allowed: 3
+      </div>
 
-</div>
-
-</section>
+    </section>
 
 <script>
   const status =
@@ -367,7 +364,7 @@ const maxDownloads = 3;
 
         // START DOWNLOAD
         window.open(
-          "/downloads/The-Funk-Strut-12-inch.zip",
+          "/downloads/The-Funk-Strut-radio.zip",
           "_blank"
         );
 

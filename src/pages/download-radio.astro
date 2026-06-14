@@ -3,7 +3,6 @@ const pageTitle = 'The Funk Strut (Radio Version)';
 const maxDownloads = 3;
 ---
 
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -52,7 +51,7 @@ const maxDownloads = 3;
         rgba(0,0,0,0.03),
         rgba(0,0,0,0.12)
       ),
-      url('/images/hero/logos/thefunkstrut12inch.png');
+      url('/images/hero/logos/thefunkstrutradio.png');
 
     background-size: 30%;
     background-position: center center;
@@ -309,7 +308,7 @@ const maxDownloads = 3;
         <a
           id="downloadBtn"
           class="download-btn"
-          href="/downloads/The-Funk-Strut-12-inch.zip"
+          href="/downloads/The-Funk-Strut-radio.zip"
           download
         >
           DOWNLOAD NOW
@@ -347,43 +346,40 @@ const maxDownloads = 3;
 
   }, 4000);
 
-  // DOWNLOAD BUTTON
   downloadBtn.addEventListener(
-    "click",
-    (event) => {
+  "click",
+  (event) => {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      if (hasDownloaded) return;
+    if (hasDownloaded) return;
 
-      hasDownloaded = true;
+    hasDownloaded = true;
 
-      downloadBtn.disabled = true;
+    downloadBtn.disabled = true;
 
-      status.textContent =
-        "PREPARING SECURE DOWNLOAD...";
+    status.textContent =
+      "PREPARING SECURE DOWNLOAD...";
+
+    setTimeout(() => {
+
+      // START DOWNLOAD
+      window.open(
+        "/downloads/The-Funk-Strut-radio.zip",
+        "_blank"
+      );
+
+      status.innerHTML =
+        "DOWNLOAD COMPLETE<br>RETURNING TO HOME PAGE...";
 
       setTimeout(() => {
+        window.location.href = "/";
+      }, 3000);
 
-        // START DOWNLOAD
-        window.open(
-          "/downloads/The-Funk-Strut-12-inch.zip",
-          "_blank"
-        );
+    }, 2000);
 
-        status.innerHTML =
-          "DOWNLOAD COMPLETE<br>RETURNING TO HOME PAGE...";
-
-        setTimeout(() => {
-
-          window.location.href = "/";
-
-        }, 3000);
-
-      }, 2000);
-
-    }
-  );
+  }
+);
 </script>
 
   </body>

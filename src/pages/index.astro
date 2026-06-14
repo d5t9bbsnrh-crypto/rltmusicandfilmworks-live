@@ -1,8 +1,5 @@
 ---
-import Navbar from "../components/Navbar.astro";
-
-const audioSrc =
-  "/audio/the-funk-strut-preview.mp3";
+const title = "RLT Music & Film Works";
 ---
 
 <html lang="en">
@@ -14,297 +11,208 @@ const audioSrc =
       content="width=device-width, initial-scale=1.0"
     />
 
-    <title>RLT Music & Film Works</title>
+    <title>{title}</title>
 
     <style>
       * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
       }
 
-      html,
       body {
-        width: 100%;
-        min-height: 100%;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-        font-family: Georgia, "Times New Roman", serif;
+        margin: 0;
         background: #000;
-        color: #fff;
-      }
-
-      body {
-        position: relative;
-      }
-
-      .page {
-        position: relative;
-        width: 100%;
-        min-height: 100vh;
+        color: white;
+        font-family: Arial, sans-serif;
         overflow: hidden;
-        background: #000;
-      }
-
-      .hero-bg {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        z-index: 0;
-      }
-
-      .content {
-        position: relative;
-        z-index: 2;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
       }
 
       header {
+        position: relative;
         width: 100%;
-        padding: 26px 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid rgba(255,255,255,.18);
-      }
-
-      .top-nav {
-        display: flex;
-        align-items: center;
-        gap: 60px;
-      }
-
-      .top-nav a,
-      .footer-nav a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 700;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-        transition:
-          color .25s ease,
-          text-shadow .25s ease;
-      }
-
-      .top-nav a:hover,
-      .footer-nav a:hover {
-        color: #ffdfdf;
-
-        text-shadow:
-          0 0 12px rgba(255,65,65,.8);
-      }
-
-      main {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 60px 24px;
-      }
-
-      .hero {
-        width: min(1400px, 96vw);
-      }
-
-      .hero-layout {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
-        flex-wrap: nowrap;
-      }
-
-      .hero-img-wrap {
-        width: min(980px, 78vw);
-        border-radius: 20px;
+        height: 100vh;
         overflow: hidden;
-        border: 2px solid rgba(255,255,255,.16);
-        background: rgba(0,0,0,.45);
-
-        box-shadow:
-          0 0 35px rgba(255,255,255,.08);
       }
 
-      .hero-img-wrap img {
-        display: block;
-        width: 100%;
-        height: auto;
+ .hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter:
+    brightness(1.08)
+    contrast(1.06)
+    saturate(1.04);
+
+  image-rendering: auto;
+
+  transform: scale(1.0);
+}
+      nav {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        display: flex;
+        gap: 42px;
+      }
+      nav a {
+       text-decoration: none;
+       color: #ffd700;
+
+        font-size: 0.92rem;
+
+        font-weight: 700;
+
+        letter-spacing: 2.4px;
+
+         transition: 0.3s ease;
+}
+
+      nav a:hover {
+        color: white;
       }
 
-      .side-buttons {
+      .button-group {
+        position: absolute;
+
+        right: 6%;
+
+        top: 50%;
+        transform: translateY(-50%);
+
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
-        margin-left: -6px;
+        gap: 20px;
+
+        z-index: 10;
       }
 
-      .buy-btn,
-      .listen-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 260px;
-        padding: 20px 32px;
-        border-radius: 999px;
-        border: 2px solid #fff;
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.15rem;
-        font-weight: 800;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-        cursor: pointer;
+      .action-button {
+       width: 208px;
 
-        transition:
-          transform .25s ease,
-          box-shadow .25s ease;
-      }
+        padding: 14px 16px;
 
-      .buy-btn {
-        background: linear-gradient(
-          180deg,
-          #ff1a1a 0%,
-          #b30000 35%,
-          #1a0000 72%,
-          #000000 100%
-        );
+      border-radius: 14px;
+       border: none;
 
-        border:
-          2px solid rgba(255,255,255,.95);
 
-        color: #fff;
 
-        box-shadow:
-          0 0 12px rgba(255,0,0,.75),
-          0 0 28px rgba(255,0,0,.95),
-          0 0 50px rgba(0,0,0,.95),
-          inset 0 2px 10px rgba(255,255,255,.25),
-          inset 0 -10px 18px rgba(0,0,0,.75);
+  cursor: pointer;
 
-        position: relative;
-        overflow: hidden;
+  font-size: 0.8rem;
+  font-weight: 700;
 
-        animation:
-          blackRedFlash 1s infinite alternate;
-      }
+  text-align: center;
+  text-decoration: none;
 
-      @keyframes blackRedFlash {
-
-        0% {
-          transform: scale(1);
-        }
-
-        100% {
-          transform: scale(1.05);
-        }
-      }
-
-      .listen-btn {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+      #previewButton {
         background:
-          rgba(255,255,255,.08);
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
 
-        backdrop-filter: blur(6px);
+        color: black;
+
+        border: 2px solid #ffcc33;
 
         box-shadow:
-          0 0 18px rgba(255,255,255,.25),
-          inset 0 0 12px rgba(255,255,255,.08);
-      }
+          0 0 18px rgba(255,215,0,0.75);
 
-      .buy-btn:hover,
-      .listen-btn:hover {
-        transform:
-          translateY(-3px) scale(1.03);
-      }
-
-      .audio-player {
-        margin-top: 8px;
-        display: none;
-      }
-
-      .audio-player audio {
-        width: min(320px, 90vw);
-      }
-
-      footer {
-        padding: 26px 24px 30px;
-        border-top:
-          1px solid rgba(255,255,255,.18);
-        text-align: center;
-      }
-
-      .footer-nav {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 32px;
-        margin-bottom: 14px;
-        flex-wrap: wrap;
       }
 
-      footer p {
-        color: rgba(255,255,255,.7);
-        font-size: .95rem;
+      #previewButton:hover {
+        transform: scale(1.03);
+
+        box-shadow:
+          0 0 26px rgba(255,215,0,0.95);
       }
 
-      /* DOWNLOAD SCREEN */
+      .buy-button {
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
 
-      #download-screen {
+        color: black;
+
+        border: 2px solid #ffcc33;
+
+        box-shadow:
+          0 0 18px rgba(255,215,0,0.75);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+      }
+
+      .buy-button:hover {
+        transform: scale(1.03);
+
+        box-shadow:
+          0 0 26px rgba(255,215,0,0.95);
+      }
+
+      .button-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+      }
+
+      .download-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,.96);
-        z-index: 9999;
+
+        background: rgba(0,0,0,0.92);
+
         display: none;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        z-index: 9999;
+
         text-align: center;
-        padding: 20px;
       }
 
-      .download-box {
-        max-width: 520px;
-      }
-
-      .download-box h1 {
-        color: gold;
-        margin-bottom: 20px;
-        font-size: 2rem;
-      }
-
-      .download-text {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-      }
-
-      .small-text {
-        opacity: .82;
-        margin-bottom: 30px;
+      .download-overlay.active {
+        display: flex;
       }
 
       .loader {
-        width: 60px;
-        height: 60px;
-        border: 6px solid #444;
-        border-top: 6px solid gold;
-        border-radius: 50%;
-        margin: 20px auto;
-        animation: spin 1s linear infinite;
-      }
+        width: 80px;
+        height: 80px;
 
-      #manual-download {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 14px 24px;
-        background: gold;
-        color: #000;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 8px;
-        font-size: 1rem;
+        border: 8px solid rgba(255,255,255,0.15);
+        border-top: 8px solid #ffd700;
+
+        border-radius: 50%;
+
+        animation: spin 1s linear infinite;
+
+        margin-bottom: 25px;
       }
 
       @keyframes spin {
@@ -313,300 +221,274 @@ const audioSrc =
         }
       }
 
-      @media (max-width: 900px) {
+      .download-overlay h1 {
+        color: #ffd700;
+        font-size: 2rem;
+        margin-bottom: 16px;
 
-        .hero-layout {
-          flex-direction: column;
-          gap: 28px;
-        }
-
-        .hero-img-wrap {
-          width: 96vw;
-        }
-
-        .side-buttons {
-          width: 100%;
-          margin-left: 0;
-        }
-
-        .buy-btn,
-        .listen-btn {
-          width: 100%;
-          max-width: 340px;
-          font-size: 1rem;
-        }
-
-        header {
-          padding: 18px 20px;
-        }
-
-        .top-nav {
-          gap: 24px;
-          flex-wrap: wrap;
-          justify-content: center;
-        }
-
-        main {
-          padding-top: 40px;
-        }
+        text-shadow:
+          0 0 10px rgba(255,215,0,0.8);
       }
-    </style>
+
+      .download-link {
+        margin-top: 24px;
+
+        padding: 16px 26px;
+
+        border-radius: 14px;
+
+        text-decoration: none;
+
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
+
+        color: black;
+
+        font-weight: 700;
+
+        box-shadow:
+          0 0 18px rgba(255,215,0,0.75);
+      }
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .button-group {
+
+    right: 50%;
+
+    top: auto;
+
+    bottom: 70px;
+
+    transform:
+      translateX(50%);
+  }
+
+  .action-button {
+    width: 260px;
+  }
+
+  nav {
+    gap: 24px;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+}
+
+/* PHONES */
+@media (max-width: 768px) {
+
+  .hero-image {
+
+    object-position: center;
+
+    transform: scale(1.04);
+  }
+
+  nav {
+
+    top: 16px;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+  }
+
+  nav a {
+
+    font-size: 0.8rem;
+
+    letter-spacing: 1.5px;
+  }
+
+  .button-group {
+
+    width: 100%;
+
+    left: 50%;
+
+    right: auto;
+
+    bottom: 38px;
+
+    top: auto;
+
+    transform:
+      translateX(-50%);
+
+    align-items: center;
+  }
+
+  .action-button {
+
+    width: 88%;
+
+    max-width: 300px;
+  }
+}
+
+/* LANDSCAPE PHONES */
+@media
+(max-height: 500px)
+and (orientation: landscape) {
+
+  .button-group {
+
+    right: 5%;
+
+    left: auto;
+
+    top: 50%;
+
+    bottom: auto;
+
+    transform:
+      translateY(-50%);
+  }
+
+  .action-button {
+    width: 220px;
+  }
+}
+
+</style>
   </head>
 
   <body>
+    <header>
 
-    <div class="page">
+      <img
+        src="/images/hero/rlt-homepage-hero-master.png"
+        alt="RLT Music & Film Works"
+        class="hero-image"
+      />
 
-      <div class="hero-bg"></div>
 
-      <div class="content">
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/store">STORE</a>
+        <a href="/cart">CART</a>
+      </nav>
 
-        <header>
+      <div class="button-group">
 
-          <nav class="top-nav">
-
-            <a href="/">HOME</a>
-            <a href="/store">STORE</a>
-            <a href="/cart">CART</a>
-
-          </nav>
-
-        </header>
-
-        <main>
-
-          <section class="hero">
-
-            <div class="hero-layout">
-
-              <div class="hero-img-wrap">
-
-                <img
-                  src="/images/hero/rlt-homepage-hero-master.png"
-                  alt="RLT Music & Film Works"
-                />
-
-              </div>
-
-              <div class="side-buttons">
-
-                <button
-                  class="listen-btn"
-                  id="listenButton"
-                  type="button"
-                >
-                  ♫ LISTEN TO ♫
-                </button>
-
-                <div
-                  class="audio-player"
-                  id="audioPlayer"
-                >
-
-                  <audio controls>
-
-                    <source
-                      src={audioSrc}
-                      type="audio/mpeg"
-                    />
-
-                  </audio>
-
-                </div>
-
-                <a
-                  class="buy-btn"
-                  href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
-                >
-                  BUY NOW
-                </a>
-
-              </div>
-
-            </div>
-
-          </section>
-
-        </main>
-
-        <footer>
-
-          <nav class="footer-nav">
-
-            <a href="/">HOME</a>
-            <a href="/store">STORE</a>
-            <a href="/cart">CART</a>
-
-          </nav>
-
-          <p>
-            © 2026 RLT Music &amp;
-            Film Works.
-            All Rights Reserved.
-          </p>
-
-        </footer>
-
-      </div>
-
-    </div>
-
-    <!-- DOWNLOAD SCREEN -->
-
-    <div id="download-screen">
-
-      <div class="download-box">
-
-        <h1>
-          Thank You For Your Purchase
-        </h1>
-
-        <p class="download-text">
-          Preparing your download...
-        </p>
-
-        <p class="small-text">
-          Please wait a few seconds.
-        </p>
-
-        <div class="loader"></div>
+        <button
+          id="previewButton"
+          class="action-button"
+        >
+          <div class="button-text">
+            <span>Listen to</span>
+            <span>The Funk Strut</span>
+          </div>
+        </button>
 
         <a
-          id="manual-download"
-          href="/downloads/The-Funk-Strut.zip"
-          download
+          href="https://buy.stripe.com/test_28EeVd07049Sb6e1vI9ws00"
+          target="_blank"
+          class="action-button buy-button"
         >
-          TAP HERE TO DOWNLOAD
+          <div class="button-text">
+            <span>Download The Funk Strut</span>
+            <span>$4.99</span>
+          </div>
+        </a>
+
+
+        <a
+          href="https://buy.stripe.com/test_eVq7sN3Shcd60aEc8gcfK02"
+          target="_blank"
+          class="action-button buy-button"
+        >
+          <div class="button-text">
+            <span>Download the 12" Version</span>
+            <span>of The Funk Strut</span>
+            <span>$10.99</span>
+          </div>
         </a>
 
       </div>
 
+      <audio
+        id="previewAudio"
+        src="/audio/the-funk-strut-preview.mp3"
+      ></audio>
+
+    </header>
+
+    <div
+      id="downloadOverlay"
+      class="download-overlay"
+    >
+      <div class="loader"></div>
+
+      <h1>
+        Thank You For Your Purchase
+      </h1>
+
+      <a
+        href="/downloads/The-Funk-Strut.zip"
+        class="download-link"
+      >
+        TAP HERE TO DOWNLOAD
+      </a>
     </div>
 
     <script>
+      const previewButton =
+        document.getElementById("previewButton");
 
-      const listenButton =
-        document.getElementById(
-          "listenButton"
-        );
+      const previewAudio =
+        document.getElementById("previewAudio");
 
-      const audioPlayer =
-        document.getElementById(
-          "audioPlayer"
-        );
+      let isPlaying = false;
+
+      previewButton.addEventListener("click", () => {
+
+        if (!isPlaying) {
+
+          previewAudio.play();
+
+          isPlaying = true;
+
+        } else {
+
+          previewAudio.pause();
+
+          previewAudio.currentTime = 0;
+
+          isPlaying = false;
+        }
+
+      });
+
+      previewAudio.addEventListener("ended", () => {
+        isPlaying = false;
+      });
+
+      const params =
+        new URLSearchParams(window.location.search);
 
       if (
-        listenButton &&
-        audioPlayer
+        params.get("download") === "true"
       ) {
 
-        listenButton.addEventListener(
-          "click",
-          () => {
+        const overlay =
+          document.getElementById("downloadOverlay");
 
-            audioPlayer.style.display =
-              "block";
-
-            const audio =
-              audioPlayer.querySelector(
-                "audio"
-              );
-
-            if (audio) {
-              audio.play();
-            }
-
-          }
-        );
-
+        overlay.classList.add("active");
       }
-
-      document.addEventListener(
-        "DOMContentLoaded",
-        () => {
-
-          const buyButtons =
-            document.querySelectorAll(
-              'a[href*="stripe.com"]'
-            );
-
-          buyButtons.forEach(
-            (button) => {
-
-              button.addEventListener(
-                "click",
-                () => {
-
-                  sessionStorage.setItem(
-                    "rltDownloadPending",
-                    "true"
-                  );
-
-                }
-              );
-
-            }
-          );
-
-          const params =
-            new URLSearchParams(
-              window.location.search
-            );
-
-          if (
-            params.get("download") === "true" ||
-            sessionStorage.getItem(
-              "rltDownloadPending"
-            ) === "true"
-          ) {
-
-            const screen =
-              document.getElementById(
-                "download-screen"
-              );
-
-            if (screen) {
-              screen.style.display =
-                "flex";
-            }
-
-            setTimeout(() => {
-
-              sessionStorage.removeItem(
-                "rltDownloadPending"
-              );
-
-              const loader =
-                document.querySelector(
-                  ".loader"
-                );
-
-              if (loader) {
-                loader.style.display =
-                  "none";
-              }
-
-              const text =
-                document.querySelector(
-                  ".download-text"
-                );
-
-              if (text) {
-
-                text.innerHTML =
-                  "Tap the button below to download your song.";
-
-              }
-
-            }, 5000);
-
-          }
-
-        }
-      );
-
     </script>
 
   </body>
-
 </html>

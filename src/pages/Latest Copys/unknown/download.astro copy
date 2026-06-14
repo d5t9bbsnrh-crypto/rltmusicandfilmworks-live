@@ -1,0 +1,355 @@
+---
+const title = "DOWNLOAD READY";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>{title}</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .return-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.96);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .return-overlay.hidden {
+        display: none;
+      }
+
+      .return-box {
+        max-width: 520px;
+        width: 100%;
+      }
+
+      .return-box h2 {
+        color: gold;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        text-shadow:
+          0 0 10px rgba(255, 215, 0, 0.9),
+          0 0 20px rgba(255, 215, 0, 0.6);
+        animation: glowPulse 2s infinite ease-in-out;
+      }
+
+      .return-box p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .spinner {
+        width: 56px;
+        height: 56px;
+        border: 5px solid rgba(255, 215, 0, 0.25);
+        border-top: 5px solid gold;
+        border-radius: 50%;
+        margin: 25px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      .download-ready {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .download-ready.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .download-ready h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+        color: gold;
+        text-shadow:
+          0 0 10px rgba(255, 215, 0, 0.9),
+          0 0 20px rgba(255, 215, 0, 0.7),
+          0 0 30px rgba(255, 215, 0, 0.5);
+        animation: glowPulse 2s infinite ease-in-out;
+        margin-bottom: 20px;
+      }
+
+      .download-ready p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+
+      .download-artwork {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 16px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow:
+          0 0 25px rgba(255, 215, 0, 0.35),
+          0 0 45px rgba(255, 215, 0, 0.2);
+      }
+
+      .download-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 18px 36px;
+        background: linear-gradient(
+          135deg,
+          #b8860b,
+          #ffd700,
+          #b8860b
+        );
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        transition: 0.3s ease;
+        box-shadow:
+          0 0 15px rgba(255, 215, 0, 0.5);
+      }
+
+      .download-button:hover {
+        transform: scale(1.05);
+      }
+
+      .download-message {
+        margin-top: 18px;
+        font-size: 0.95rem;
+        color: #ffd700;
+      }
+
+      .download-error {
+        color: #ff6b6b;
+        margin-top: 18px;
+        font-weight: bold;
+      }
+
+      @keyframes glowPulse {
+        0% {
+          opacity: 0.85;
+          transform: scale(1);
+        }
+
+        50% {
+          opacity: 1;
+          transform: scale(1.03);
+        }
+
+        100% {
+          opacity: 0.85;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .download-ready {
+          padding: 10px;
+        }
+
+        .download-button {
+          width: 100%;
+          max-width: 320px;
+          font-size: 1rem;
+        }
+
+        .download-artwork {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div
+      id="returnOverlay"
+      class="return-overlay"
+    >
+      <div class="return-box">
+        <h2>Returning from Stripe</h2>
+
+        <div class="spinner"></div>
+
+        <p>
+          Please wait while your download is prepared.
+        </p>
+
+        <p>
+          Your download page will be ready shortly.
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="downloadReady"
+      class="download-ready"
+    >
+
+      <h1>DOWNLOAD READY</h1>
+
+      <p>
+        Thank You For Your Purchase
+      </p>
+
+      <p>
+        Your download is now available below.
+      </p>
+
+      <img
+        src="/images/hero/logos/radio_version_under_2mb.jpg"
+        alt="The Funk Strut Digital Download Artwork"
+        class="download-artwork"
+      />
+
+      <a
+        id="downloadButton"
+        href="/downloads/The-Funk-Strut-12-inch.zip"
+        class="download-button"
+        download
+      >
+        DOWNLOAD NOW
+      </a>
+
+      <div
+        id="downloadMessage"
+        class="download-message"
+      ></div>
+
+      <div
+        id="downloadError"
+        class="download-error"
+      ></div>
+
+    </div>
+
+    <script>
+      const RETURN_DELAY = 5000;
+      const MAX_DOWNLOADS = 3;
+      const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
+
+      const DOWNLOAD_COUNT_KEY = "the-funk-strut-download-count";
+      const DOWNLOAD_CREATED_KEY = "the-funk-strut-download-created";
+      const STRIPE_PENDING_KEY = "rltDownloadPending";
+
+      const returnOverlay = document.getElementById("returnOverlay");
+      const downloadReady = document.getElementById("downloadReady");
+      const downloadButton = document.getElementById("downloadButton");
+      const downloadMessage = document.getElementById("downloadMessage");
+      const downloadError = document.getElementById("downloadError");
+
+      const params = new URLSearchParams(window.location.search);
+
+      const stripeReturn =
+        params.get("download") === "true" ||
+        params.get("success") === "true" ||
+        sessionStorage.getItem(STRIPE_PENDING_KEY) === "true";
+
+      const now = Date.now();
+
+      let createdTime = localStorage.getItem(DOWNLOAD_CREATED_KEY);
+      let downloadCount = Number(localStorage.getItem(DOWNLOAD_COUNT_KEY) || 0);
+
+      if (!createdTime) {
+        createdTime = now;
+        localStorage.setItem(DOWNLOAD_CREATED_KEY, String(createdTime));
+      }
+
+      const expired = now - Number(createdTime) > EXPIRATION_TIME;
+
+      if (expired) {
+        localStorage.setItem(DOWNLOAD_COUNT_KEY, "0");
+        localStorage.setItem(DOWNLOAD_CREATED_KEY, String(now));
+        downloadCount = 0;
+        createdTime = now;
+      }
+
+      function showDownloadPage() {
+        returnOverlay.classList.add("hidden");
+        downloadReady.classList.add("visible");
+
+        if (downloadCount >= MAX_DOWNLOADS) {
+          downloadButton.style.display = "none";
+          downloadError.textContent =
+            "DOWNLOAD ALREADY USED — Download limit reached.";
+          downloadMessage.textContent =
+            "The download limit is 3 attempts within 24 hours.";
+          return;
+        }
+
+        downloadMessage.textContent =
+          "You have " +
+          (MAX_DOWNLOADS - downloadCount) +
+          " download attempt(s) remaining within 24 hours.";
+      }
+
+      downloadButton.addEventListener("click", function () {
+        downloadCount += 1;
+
+        localStorage.setItem(DOWNLOAD_COUNT_KEY, String(downloadCount));
+
+        if (downloadCount >= MAX_DOWNLOADS) {
+          downloadMessage.textContent =
+            "This is your final download attempt within 24 hours.";
+        } else {
+          downloadMessage.textContent =
+            "You have " +
+            (MAX_DOWNLOADS - downloadCount) +
+            " download attempt(s) remaining within 24 hours.";
+        }
+      });
+
+      if (stripeReturn) {
+        sessionStorage.removeItem(STRIPE_PENDING_KEY);
+
+        setTimeout(() => {
+          showDownloadPage();
+        }, RETURN_DELAY);
+      } else {
+        showDownloadPage();
+      }
+    </script>
+
+  </body>
+</html>

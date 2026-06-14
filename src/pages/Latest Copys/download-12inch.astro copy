@@ -316,12 +316,10 @@ const maxDownloads = 3;
         </a>
 
        <div class="limit">
-  Maximum Attempts Allowed: 3
-</div>
+          Maximum Attempts Allowed: 3
+      </div>
 
-</div>
-
-</section>
+    </section>
 
 <script>
   const status =

@@ -1,401 +1,416 @@
+---
+const title = "The Funk Strut Store";
+---
+
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
 
-    <title>RLT Store</title>
+<title>{title}</title>
 
-    <style>
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-      *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-      }
+  body {
+    margin: 0;
+    background: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+  }
 
-      html,
-      body{
-        width:100%;
-        min-height:100%;
-        overflow-x:hidden;
-        background:#000;
-      }
+  header {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
 
-      body{
-        font-family:Arial, Helvetica, sans-serif;
-        color:white;
-      }
+  .hero-image {
+    position: absolute;
+    inset: 0;
 
-      a{
-        touch-action:manipulation;
-        -webkit-tap-highlight-color:transparent;
-      }
+    width: 100%;
+    height: 100%;
 
-      .hero{
-        min-height:100vh;
-        background:#000;
+    object-fit: cover;
 
-        display:flex;
-        flex-direction:column;
+    opacity: 1;
+  }
 
-        position:relative;
-        overflow:hidden;
-      }
+  .overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 8%;
+  }
 
-      .hero::before{
-        content:"";
+  .store-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 
-        position:absolute;
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-end;
+  }
 
-        top:50%;
-        left:50%;
+  nav {
+    position: absolute;
 
-        transform:translate(-50%, -50%);
+    top: 18px;
 
-        width:96%;
-        height:96%;
+    left: 50%;
 
-        background-image:url('/images/hero/logos/Ozone-store.png');
+    transform: translateX(-50%);
 
-        background-size:contain;
-        background-repeat:no-repeat;
-        background-position:center center;
+    z-index: 10;
 
-        z-index:1;
+    display: flex;
 
-        pointer-events:none;
-      }
+    justify-content: center;
+    align-items: center;
 
-      nav{
-        width:100%;
+    gap: 42px;
 
-        padding:20px 40px;
+    width: 100%;
+  }
 
-        display:flex;
-        justify-content:center;
-        align-items:center;
+  nav a {
+    text-decoration: none;
+    color: #ffd700;
 
-        position:fixed;
-        top:0;
-        left:0;
+    font-size: 0.92rem;
 
-        z-index:99999;
-      }
+    font-weight: 700;
 
-      .nav-left{
-        display:flex;
-        align-items:center;
-        gap:40px;
+    letter-spacing: 2.4px;
 
-        padding:14px 40px;
+    transition: 0.3s ease;
+  }
 
-        background:rgba(0,0,0,0.45);
+  nav a:hover {
+    color: white;
+  }
 
-        border:1px solid rgba(255,215,0,0.18);
-        border-radius:20px;
+  .action-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
-        backdrop-filter:blur(12px);
-      }
+    text-align: center;
 
-      nav a{
-        color:white;
-        text-decoration:none;
+    width: 212px;
 
-        letter-spacing:2px;
-        font-size:1.35rem;
-        font-weight:700;
+    min-height: 62px;
 
-        transition:0.3s ease;
-      }
+    padding: 11px 15px;
 
-      nav a:hover{
-        color:#ffd700;
-      }
+    border-radius: 10px;
+
+    text-decoration: none;
 
-      .hero-content{
-        flex:1;
+    font-size: 0.74rem;
 
-        display:flex;
-        justify-content:center;
-        align-items:center;
+    font-weight: bold;
 
-        position:relative;
-        z-index:2;
-      }
+    letter-spacing: 0.7px;
 
-      /* DOWNLOAD SECTION */
+    transition: 0.3s ease;
 
-      .download-button{
-        position:absolute;
+    border: none;
 
-        top:50%;
-        left:72%;
+    cursor: pointer;
 
-        transform:translateY(-50%);
+    background: linear-gradient(
+      135deg,
+      #b8860b,
+      #ffd700,
+      #b8860b
+    );
 
-        z-index:5;
+    color: #000;
 
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        gap:18px;
-      }
+    box-shadow:
+      0 0 10px rgba(255, 215, 0, 0.45);
+  }
 
-      /* FLASHING THE FUNK STRUT */
+  .action-button:hover {
+    transform: scale(1.05);
+  }
 
-      .funk-title{
-        font-size:2.1rem;
-        font-weight:900;
-        letter-spacing:4px;
-        text-transform:uppercase;
+  .button-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
 
-        animation:flashFunk 1s infinite;
+  .checkout-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.96);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    text-align: center;
+    padding: 20px;
+  }
 
-        text-align:center;
+  .checkout-overlay.active {
+    display: flex;
+  }
 
-        text-shadow:
-          0 0 10px rgba(255,255,255,0.9),
-          0 0 22px rgba(255,255,255,0.7);
-      }
+  .spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 215, 0, 0.25);
+    border-top: 5px solid gold;
+    border-radius: 50%;
+    margin: 25px auto;
+    animation: spin 1s linear infinite;
+  }
 
-      @keyframes flashFunk{
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
 
-        0%{
-          color:#fff;
-          opacity:1;
-        }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
-        50%{
-          color:#000;
-          opacity:0.25;
-        }
+  /* TABLETS */
+@media (max-width: 1024px) {
 
-        100%{
-          color:#fff;
-          opacity:1;
-        }
+  .overlay {
+    justify-content: center;
+    padding-right: 0;
+  }
 
-      }
+  .button-group {
+    align-items: center;
+  }
 
-      .download-btn{
-        display:inline-block;
+  .action-button {
+    width: 260px;
+    font-size: 0.95rem;
+  }
 
-        padding:20px 40px;
+  nav {
+    gap: 24px;
+  }
 
-        background:#d9b54a;
-        color:#000;
+  nav a {
+    font-size: 0.9rem;
+  }
+}
 
-        border-radius:18px;
+/* PHONES */
+@media (max-width: 768px) {
 
-        text-decoration:none;
+  .hero-image {
+  position: absolute;
+  inset: 0;
 
-        font-weight:800;
-        letter-spacing:1px;
+  width: 100%;
+  height: 100%;
 
-        font-size:1.2rem;
+  object-fit: cover;
+  object-position: center;
 
-        box-shadow:0 0 22px rgba(255,215,0,0.55);
+  filter:
+    brightness(1.08)
+    contrast(1.06)
+    saturate(1.04);
 
-        transition:0.3s ease;
-      }
+  image-rendering: auto;
 
-      .download-btn:hover{
-        background:#fff;
-        transform:translateY(-2px);
-      }
+  transform: scale(1.01);
 
-      /* TABLETS */
+  opacity: 1;
+}
 
-      @media (max-width:1024px){
+  nav {
 
-        .download-button{
-          left:70%;
-        }
+    top: 16px;
 
-        .funk-title{
-          font-size:1.7rem;
-        }
+    gap: 18px;
 
-        .download-btn{
-          padding:16px 28px;
-          font-size:1rem;
-        }
+    flex-wrap: wrap;
+  }
 
-      }
+  nav a {
 
-      /* MOBILE PORTRAIT */
+    font-size: 0.8rem;
 
-      @media screen and (max-width:768px) and (orientation:portrait){
+    letter-spacing: 1.5px;
+  }
 
-        .hero{
-          min-height:100svh;
-        }
+  .overlay {
 
-        nav{
-          padding:14px 10px;
-        }
+    justify-content: center;
 
-        .nav-left{
-          gap:14px;
-          padding:12px 20px;
+    padding: 0 20px;
+  }
 
-          flex-wrap:wrap;
-          justify-content:center;
-        }
+  .store-container {
+    justify-content: center;
+  }
 
-        nav a{
-          font-size:0.92rem;
-          letter-spacing:1px;
-        }
+  .button-group {
 
-        .download-button{
+    width: 100%;
 
-          top:78%;
-          left:50%;
+    align-items: center;
+  }
 
-          transform:translate(-50%, -50%);
-        }
+  .action-button {
 
-        .funk-title{
-          font-size:1.15rem;
-          letter-spacing:2px;
-        }
+    width: 88%;
 
-        .download-btn{
-          padding:12px 24px;
-          font-size:0.82rem;
+    max-width: 300px;
 
-          border-radius:14px;
+    min-height: 60px;
+  }
+}
 
-          white-space:nowrap;
-        }
+/* LANDSCAPE PHONES */
+@media
+(max-height: 500px)
+and (orientation: landscape) {
 
-      }
+  .overlay {
+    justify-content: flex-end;
+    padding-right: 5%;
+  }
 
-      /* SMALL PHONES */
+  .action-button {
+    width: 220px;
+  }
+}
+</style>
 
-      @media (max-width:480px){
 
-        nav a{
-          font-size:0.78rem;
-        }
-
-        .download-button{
-          top:80%;
-        }
-
-        .funk-title{
-          font-size:0.95rem;
-        }
-
-        .download-btn{
-          padding:11px 20px;
-          font-size:0.74rem;
-        }
-
-      }
-
-      /* VERY SMALL DEVICES */
-
-      @media (max-width:390px){
-
-        nav a{
-          font-size:0.72rem;
-        }
-
-        .funk-title{
-          font-size:0.82rem;
-        }
-
-        .download-btn{
-          padding:10px 18px;
-          font-size:0.7rem;
-        }
-
-      }
-
-      /* LANDSCAPE MOBILE */
-
-      @media screen and (max-width:932px) and (orientation:landscape){
-
-        nav{
-          padding:10px 10px;
-        }
-
-        .nav-left{
-          gap:16px;
-          padding:10px 18px;
-        }
-
-        nav a{
-          font-size:0.78rem;
-          letter-spacing:1px;
-        }
-
-        .download-button{
-          top:50%;
-          left:78%;
-        }
-
-        .funk-title{
-          font-size:0.95rem;
-        }
-
-        .download-btn{
-          padding:8px 16px;
-
-          font-size:0.62rem;
-
-          border-radius:10px;
-
-          white-space:nowrap;
-        }
-
-      }
-
-    </style>
   </head>
 
   <body>
 
-    <section class="hero">
 
-      <nav>
+<header>
 
-        <div class="nav-left">
+  <img
+    src="/images/hero/logos/Ozone-store.png"
+    alt="Store Hero"
+    class="hero-image"
+  />
 
-          <a href="/">HOME</a>
-          <a href="/store">STORE</a>
-          <a href="/cart">CART</a>
+  <nav>
+    <a href="/">HOME</a>
+    <a href="/store">STORE</a>
+    <a href="/cart">CART</a>
+  </nav>
 
-        </div>
+  <div class="overlay">
 
-      </nav>
+    <div class="store-container">
 
-      <div class="hero-content">
+      <div class="button-group">
 
-        <div class="download-button">
-
-          <div class="funk-title">
-            THE FUNK STRUT
+        <a
+          href="https://buy.stripe.com/test_eVq7sN3Shcd60aEc8gcfK02"
+          target="_blank"
+          class="action-button"
+          id="download12Button"
+        >
+          <div class="button-text">
+            <span>Download the 12" Version</span>
+            <span>of The Funk Strut</span>
+            <span>$10.99</span>
           </div>
+        </a>
 
-          <a
-            href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
-            class="download-btn"
-          >
-            DOWNLOAD NOW • $4.99
-          </a>
-
-        </div>
+        <a
+          href="https://buy.stripe.com/test_28EeVd07049Sb6e1vI9ws00"
+          target="_blank"
+          class="action-button"
+          id="downloadButton"
+        >
+          <div class="button-text">
+            <span>Download The Funk Strut</span>
+            <span>$4.99</span>
+          </div>
+        </a>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</header>
+
+<div
+  id="checkoutOverlay"
+  class="checkout-overlay"
+>
+
+  <div class="spinner"></div>
+
+</div>
+
+<script>
+  const overlay =
+    document.getElementById("checkoutOverlay");
+
+  const buttons = [
+    document.getElementById("downloadButton"),
+    document.getElementById("download12Button")
+  ];
+
+  buttons.forEach((button) => {
+
+    button.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+        overlay.classList.add("active");
+
+        const targetUrl = this.href;
+
+        setTimeout(() => {
+
+          window.location.href =
+            targetUrl;
+
+        }, 3000);
+
+      }
+    );
+
+  });
+</script>
 
   </body>
 </html>
