@@ -1,5 +1,5 @@
 ---
-const title = "Site Maintenance";
+const title = "RLT Music & Film Works";
 ---
 
 <html lang="en">
@@ -7,7 +7,7 @@ const title = "Site Maintenance";
   <meta charset="UTF-8" />
   <title>{title}</title>
   <style>
-    body {
+    body{
       background:#000;
       color:#d4af37;
       font-family:Arial,sans-serif;
@@ -23,8 +23,8 @@ const title = "Site Maintenance";
 <body>
   <div>
     <h1>RLT Music & Film Works</h1>
-    <h2>Website Under Maintenance</h2>
-    <p>Please check back shortly.</p>
+    <h2>Site Under Maintenance</h2>
+    <p>We're making updates and will be back shortly.</p>
   </div>
 </body>
 </html>
