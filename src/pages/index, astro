@@ -1,0 +1,30 @@
+---
+const title = "Site Maintenance";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{title}</title>
+  <style>
+    body {
+      background:#000;
+      color:#d4af37;
+      font-family:Arial,sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      text-align:center;
+      margin:0;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>RLT Music & Film Works</h1>
+    <h2>Website Under Maintenance</h2>
+    <p>Please check back shortly.</p>
+  </div>
+</body>
+</html>
