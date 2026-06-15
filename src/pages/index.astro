@@ -3,51 +3,491 @@ const title = "RLT Music & Film Works";
 ---
 
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
+  <head>
+    <meta charset="UTF-8" />
 
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
-    .container {
-      max-width: 700px;
-      padding: 20px;
-    }
+    <title>{title}</title>
 
-    h1 {
-      color: gold;
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-    p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-    }
-  </style>
-</head>
+      body {
+        margin: 0;
+        background: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
 
-<body>
-  <div class="container">
-    <h1>Site Under Maintenance</h1>
-    <p>
-      RLT Music & Film Works is currently undergoing scheduled maintenance.
-    </p>
-    <p>
-      Please check back soon.
-    </p>
-  </div>
-</body>
+      header {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+ .hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter:
+    brightness(1.08)
+    contrast(1.06)
+    saturate(1.04);
+
+  image-rendering: auto;
+
+  transform: scale(1.0);
+}
+      nav {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        display: flex;
+        gap: 42px;
+      }
+      nav a {
+       text-decoration: none;
+       color: #ffd700;
+
+        font-size: 0.92rem;
+
+        font-weight: 700;
+
+        letter-spacing: 2.4px;
+
+         transition: 0.3s ease;
+}
+
+      nav a:hover {
+        color: white;
+      }
+
+      .button-group {
+        position: absolute;
+
+        right: 6%;
+
+        top: 50%;
+        transform: translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        z-index: 10;
+      }
+
+      .action-button {
+       width: 208px;
+
+        padding: 14px 16px;
+
+      border-radius: 14px;
+       border: none;
+
+
+
+  cursor: pointer;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+      #previewButton {
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
+
+        color: black;
+
+        border: 2px solid #ffcc33;
+
+        box-shadow:
+          0 0 18px rgba(255,215,0,0.75);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #previewButton:hover {
+        transform: scale(1.03);
+
+        box-shadow:
+          0 0 26px rgba(255,215,0,0.95);
+      }
+
+      .buy-button {
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
+
+        color: black;
+
+        border: 2px solid #ffcc33;
+
+        box-shadow:
+          0 0 18px rgba(255,215,0,0.75);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+      }
+
+      .buy-button:hover {
+        transform: scale(1.03);
+
+        box-shadow:
+          0 0 26px rgba(255,215,0,0.95);
+      }
+
+      .button-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+      }
+
+      .download-overlay {
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0,0,0,0.92);
+
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        z-index: 9999;
+
+        text-align: center;
+      }
+
+      .download-overlay.active {
+        display: flex;
+      }
+
+      .loader {
+        width: 80px;
+        height: 80px;
+
+        border: 8px solid rgba(255,255,255,0.15);
+        border-top: 8px solid #ffd700;
+
+        border-radius: 50%;
+
+        animation: spin 1s linear infinite;
+
+        margin-bottom: 25px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .download-overlay h1 {
+        color: #ffd700;
+        font-size: 2rem;
+        margin-bottom: 16px;
+
+        text-shadow:
+          0 0 10px rgba(255,215,0,0.8);
+      }
+
+      .download-link {
+        margin-top: 24px;
+
+        padding: 16px 26px;
+
+        border-radius: 14px;
+
+        text-decoration: none;
+
+        background:
+          linear-gradient(
+            135deg,
+            #ffd700,
+            #b8860b
+          );
+
+        color: black;
+
+        font-weight: 700;
+
+        box-shadow:
+          0 0 18px rgba(255,215,0,0.75);
+      }
+
+/* TABLETS */
+@media (max-width: 1024px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .button-group {
+
+    right: 50%;
+
+    top: auto;
+
+    bottom: 70px;
+
+    transform:
+      translateX(50%);
+  }
+
+  .action-button {
+    width: 260px;
+  }
+
+  nav {
+    gap: 24px;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+}
+
+/* PHONES */
+@media (max-width: 768px) {
+
+  .hero-image {
+
+    object-position: center;
+
+    transform: scale(1.04);
+  }
+
+  nav {
+
+    top: 16px;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+  }
+
+  nav a {
+
+    font-size: 0.8rem;
+
+    letter-spacing: 1.5px;
+  }
+
+  .button-group {
+
+    width: 100%;
+
+    left: 50%;
+
+    right: auto;
+
+    bottom: 38px;
+
+    top: auto;
+
+    transform:
+      translateX(-50%);
+
+    align-items: center;
+  }
+
+  .action-button {
+
+    width: 88%;
+
+    max-width: 300px;
+  }
+}
+
+/* LANDSCAPE PHONES */
+@media
+(max-height: 500px)
+and (orientation: landscape) {
+
+  .button-group {
+
+    right: 5%;
+
+    left: auto;
+
+    top: 50%;
+
+    bottom: auto;
+
+    transform:
+      translateY(-50%);
+  }
+
+  .action-button {
+    width: 220px;
+  }
+}
+
+</style>
+  </head>
+
+  <body>
+    <header>
+
+      <img
+        src="/images/hero/rlt-homepage-hero-master.png"
+        alt="RLT Music & Film Works"
+        class="hero-image"
+      />
+
+
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/store">STORE</a>
+        <a href="/cart">CART</a>
+      </nav>
+
+      <div class="button-group">
+
+        <button
+          id="previewButton"
+          class="action-button"
+        >
+          <div class="button-text">
+            <span>Listen to</span>
+            <span>The Funk Strut</span>
+          </div>
+        </button>
+
+        <a
+      href="REPLACE_WITH_LIVE_RADIO_LINK"
+      target="_blank"
+       class="action-button buy-button"
+      >
+        <div class="button-text">
+         <span>Download The Funk Strut</span>
+          <span>$4.99</span>
+          </div>
+</a>
+
+        <a
+          href="https://buy.stripe.com/test_eVq7sN3Shcd60aEc8gcfK02"
+          target="_blank"
+          class="action-button buy-button"
+        >
+          <div class="button-text">
+            <span>Download the 12" Version</span>
+            <span>of The Funk Strut</span>
+            <span>$10.99</span>
+          </div>
+        </a>
+
+      </div>
+
+      <audio
+        id="previewAudio"
+        src="/audio/the-funk-strut-preview.mp3"
+      ></audio>
+
+    </header>
+
+    <div
+      id="downloadOverlay"
+      class="download-overlay"
+    >
+      <div class="loader"></div>
+
+      <h1>
+        Thank You For Your Purchase
+      </h1>
+
+      <a
+        href="/downloads/The-Funk-Strut.zip"
+        class="download-link"
+      >
+        TAP HERE TO DOWNLOAD
+      </a>
+    </div>
+
+    <script>
+      const previewButton =
+        document.getElementById("previewButton");
+
+      const previewAudio =
+        document.getElementById("previewAudio");
+
+      let isPlaying = false;
+
+      previewButton.addEventListener("click", () => {
+
+        if (!isPlaying) {
+
+          previewAudio.play();
+
+          isPlaying = true;
+
+        } else {
+
+          previewAudio.pause();
+
+          previewAudio.currentTime = 0;
+
+          isPlaying = false;
+        }
+
+      });
+
+      previewAudio.addEventListener("ended", () => {
+        isPlaying = false;
+      });
+
+      const params =
+        new URLSearchParams(window.location.search);
+
+      if (
+        params.get("download") === "true"
+      ) {
+
+        const overlay =
+          document.getElementById("downloadOverlay");
+
+        overlay.classList.add("active");
+      }
+    </script>
+
+  </body>
 </html>
