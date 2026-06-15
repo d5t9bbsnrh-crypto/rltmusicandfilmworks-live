@@ -27,18 +27,13 @@ const title = "RLT Music & Film Works";
     }
 
     h1 {
+      color: gold;
       font-size: 3rem;
-      margin-bottom: 20px;
-      color: #d4af37;
-    }
-
-    h2 {
-      font-size: 2rem;
       margin-bottom: 20px;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       line-height: 1.6;
     }
   </style>
@@ -46,10 +41,11 @@ const title = "RLT Music & Film Works";
 
 <body>
   <div class="container">
-    <h1>RLT Music & Film Works</h1>
-    <h2>Site Down for Maintenance</h2>
+    <h1>Site Under Maintenance</h1>
     <p>
-      We are currently performing scheduled maintenance and updates.
+      RLT Music & Film Works is currently undergoing scheduled maintenance.
+    </p>
+    <p>
       Please check back soon.
     </p>
   </div>
