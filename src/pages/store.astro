@@ -3,414 +3,245 @@ const title = "The Funk Strut Store";
 ---
 
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
-/>
-
-<title>{title}</title>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    background: #000;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-  }
-
-  header {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .hero-image {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    opacity: 1;
-  }
-
-  .overlay {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 8%;
-  }
-
-  .store-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
-
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: flex-end;
-  }
-
-  nav {
-    position: absolute;
-
-    top: 18px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 10;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 42px;
-
-    width: 100%;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: #ffd700;
-
-    font-size: 0.92rem;
-
-    font-weight: 700;
-
-    letter-spacing: 2.4px;
-
-    transition: 0.3s ease;
-  }
-
-  nav a:hover {
-    color: white;
-  }
-
-  .action-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    width: 212px;
-
-    min-height: 62px;
-
-    padding: 11px 15px;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    font-size: 0.74rem;
-
-    font-weight: bold;
-
-    letter-spacing: 0.7px;
-
-    transition: 0.3s ease;
-
-    border: none;
-
-    cursor: pointer;
-
-    background: linear-gradient(
-      135deg,
-      #b8860b,
-      #ffd700,
-      #b8860b
-    );
-
-    color: #000;
-
-    box-shadow:
-      0 0 10px rgba(255, 215, 0, 0.45);
-  }
-
-  .action-button:hover {
-    transform: scale(1.05);
-  }
-
-  .button-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.3;
-  }
-
-  .checkout-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.96);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .checkout-overlay.active {
-    display: flex;
-  }
-
-  .spinner {
-    width: 60px;
-    height: 60px;
-    border: 5px solid rgba(255, 215, 0, 0.25);
-    border-top: 5px solid gold;
-    border-radius: 50%;
-    margin: 25px auto;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* TABLETS */
-@media (max-width: 1024px) {
-
-  .overlay {
-    justify-content: center;
-    padding-right: 0;
-  }
-
-  .button-group {
-    align-items: center;
-  }
-
-  .action-button {
-    width: 260px;
-    font-size: 0.95rem;
-  }
-
-  nav {
-    gap: 24px;
-  }
-
-  nav a {
-    font-size: 0.9rem;
-  }
-}
-
-/* PHONES */
-@media (max-width: 768px) {
-
-  .hero-image {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  filter:
-    brightness(1.08)
-    contrast(1.06)
-    saturate(1.04);
-
-  image-rendering: auto;
-
-  transform: scale(1.01);
-
-  opacity: 1;
-}
-
-  nav {
-
-    top: 16px;
-
-    gap: 18px;
-
-    flex-wrap: wrap;
-  }
-
-  nav a {
-
-    font-size: 0.8rem;
-
-    letter-spacing: 1.5px;
-  }
-
-  .overlay {
-
-    justify-content: center;
-
-    padding: 0 20px;
-  }
-
-  .store-container {
-    justify-content: center;
-  }
-
-  .button-group {
-
-    width: 100%;
-
-    align-items: center;
-  }
-
-  .action-button {
-
-    width: 88%;
-
-    max-width: 300px;
-
-    min-height: 60px;
-  }
-}
-
-/* LANDSCAPE PHONES */
-@media
-(max-height: 500px)
-and (orientation: landscape) {
-
-  .overlay {
-    justify-content: flex-end;
-    padding-right: 5%;
-  }
-
-  .action-button {
-    width: 220px;
-  }
-}
-</style>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <style>
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: #000;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      header {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 1;
+      }
+
+      .overlay {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 8%;
+      }
+
+      .store-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: flex-end;
+      }
+
+      nav {
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 42px;
+        width: 100%;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #ffd700;
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 2.4px;
+        transition: 0.3s ease;
+      }
+
+      nav a:hover { color: white; }
+
+      .action-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 212px;
+        min-height: 62px;
+        padding: 11px 15px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 0.74rem;
+        font-weight: bold;
+        letter-spacing: 0.7px;
+        transition: 0.3s ease;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+        color: #000;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.45);
+      }
+
+      .action-button:hover { transform: scale(1.05); }
+
+      .button-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+      }
+
+      .checkout-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.96);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .checkout-overlay.active { display: flex; }
+
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 215, 0, 0.25);
+        border-top: 5px solid gold;
+        border-radius: 50%;
+        margin: 25px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @media (max-width: 1024px) {
+        .overlay { justify-content: center; padding-right: 0; }
+        .button-group { align-items: center; }
+        .action-button { width: 260px; font-size: 0.95rem; }
+        nav { gap: 24px; }
+        nav a { font-size: 0.9rem; }
+      }
+
+      @media (max-width: 768px) {
+        .hero-image {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: brightness(1.08) contrast(1.06) saturate(1.04);
+          image-rendering: auto;
+          transform: scale(1.01);
+          opacity: 1;
+        }
+
+        nav { top: 16px; gap: 18px; flex-wrap: wrap; }
+        nav a { font-size: 0.8rem; letter-spacing: 1.5px; }
+        .overlay { justify-content: center; padding: 0 20px; }
+        .store-container { justify-content: center; }
+        .button-group { width: 100%; align-items: center; }
+        .action-button { width: 88%; max-width: 300px; min-height: 60px; }
+      }
+
+      @media (max-height: 500px) and (orientation: landscape) {
+        .overlay { justify-content: flex-end; padding-right: 5%; }
+        .action-button { width: 220px; }
+      }
+    </style>
   </head>
 
   <body>
+    <header>
+      <img src="/images/hero/logos/Ozone-store.png" alt="Store Hero" class="hero-image" />
 
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/store">STORE</a>
+        <a href="/cart">CART</a>
+      </nav>
 
-<header>
+      <div class="overlay">
+        <div class="store-container">
+          <div class="button-group">
+            <a
+              href="https://buy.stripe.com/00w00lbkJ5OIcXq1tCcfK04"
+              class="action-button"
+              id="download12Button"
+            >
+              <div class="button-text">
+                <span>Download the 12" Version</span>
+                <span>of The Funk Strut</span>
+                <span>$10.99</span>
+              </div>
+            </a>
 
-  <img
-    src="/images/hero/logos/Ozone-store.png"
-    alt="Store Hero"
-    class="hero-image"
-  />
-
-  <nav>
-    <a href="/">HOME</a>
-    <a href="/store">STORE</a>
-    <a href="/cart">CART</a>
-  </nav>
-
-  <div class="overlay">
-
-    <div class="store-container">
-
-      <div class="button-group">
-
-        <a
-      href="https://buy.stripe.com/00w00lbkJ5OIcXq1tCcfK04"
-      target="_blank"
-     class="action-button"
-      id="download12Button"
->
-          <div class="button-text">
-            <span>Download the 12" Version</span>
-            <span>of The Funk Strut</span>
-            <span>$10.99</span>
+            <a
+              href="https://buy.stripe.com/00w3cxdsR90U1eI2xGcfK03"
+              class="action-button"
+              id="downloadButton"
+            >
+              <div class="button-text">
+                <span>Download The Funk Strut</span>
+                <span>$4.99</span>
+              </div>
+            </a>
           </div>
-        </a>
-
-        <a
-          href="https://rltmusicandfilmworks.com/download-radio"
-          target="_blank"
-          class="action-button"
-          id="downloadButton"
-        >
-          <div class="button-text">
-            <span>Download The Funk Strut</span>
-            <span>$4.99</span>
-          </div>
-        </a>
-
+        </div>
       </div>
+    </header>
 
+    <div id="checkoutOverlay" class="checkout-overlay">
+      <div class="spinner"></div>
     </div>
 
-  </div>
+    <script>
+      const overlay = document.getElementById("checkoutOverlay");
+      const buttons = [
+        document.getElementById("downloadButton"),
+        document.getElementById("download12Button")
+      ];
 
-</header>
-
-<div
-  id="checkoutOverlay"
-  class="checkout-overlay"
->
-
-  <div class="spinner"></div>
-
-</div>
-
-<script>
-  const overlay =
-    document.getElementById("checkoutOverlay");
-
-  const buttons = [
-    document.getElementById("downloadButton"),
-    document.getElementById("download12Button")
-  ];
-
-  buttons.forEach((button) => {
-
-    button.addEventListener(
-      "click",
-      function (event) {
-
-        event.preventDefault();
-
-        overlay.classList.add("active");
-
-        const targetUrl = this.href;
-
-        setTimeout(() => {
-
-          window.location.href =
-            targetUrl;
-
-        }, 3000);
-
-      }
-    );
-
-  });
-</script>
-
+      buttons.forEach((button) => {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+          overlay.classList.add("active");
+          const targetUrl = this.href;
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 700);
+        });
+      });
+    </script>
   </body>
 </html>
