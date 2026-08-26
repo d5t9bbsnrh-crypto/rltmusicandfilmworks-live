@@ -24,22 +24,13 @@ function errorResponse(message, status) {
   });
 }
 
-export async function onRequestGet(context) {
-  const url = new URL(context.request.url);
-  const sessionId = url.searchParams.get("session_id");
-  const productId = url.searchParams.get("product");
-  const product = PRODUCTS[productId];
-
-  if (!sessionId || !sessionId.startsWith("cs_") || !product) {
-    return errorResponse("Invalid download request.", 400);
-  }
-
+async function verifyPurchase(context, sessionId, product) {
   if (!context.env.STRIPE_SECRET_KEY) {
-    return errorResponse("Download service is not configured yet.", 503);
+    return { error: errorResponse("Download service is not configured yet.", 503) };
   }
 
   if (!context.env.DOWNLOADS) {
-    return errorResponse("Download storage is not configured yet.", 503);
+    return { error: errorResponse("Download storage is not configured yet.", 503) };
   }
 
   const stripeResponse = await fetch(
@@ -52,7 +43,7 @@ export async function onRequestGet(context) {
   );
 
   if (!stripeResponse.ok) {
-    return errorResponse("We could not verify this Stripe checkout session.", 403);
+    return { error: errorResponse("We could not verify this Stripe checkout session.", 403) };
   }
 
   const session = await stripeResponse.json();
@@ -64,15 +55,50 @@ export async function onRequestGet(context) {
     session.currency !== "usd" ||
     session.amount_subtotal !== product.amountSubtotal
   ) {
-    return errorResponse("Payment verification failed for this download.", 403);
+    return { error: errorResponse("Payment verification failed for this download.", 403) };
   }
 
   const now = Math.floor(Date.now() / 1000);
   if (!session.created || now - session.created > MAX_SESSION_AGE_SECONDS) {
-    return errorResponse(
-      "This secure download link has expired. Please contact RLT Music & Film Works for assistance.",
-      410
-    );
+    return {
+      error: errorResponse(
+        "This secure download link has expired. Please contact RLT Music & Film Works for assistance.",
+        410
+      ),
+    };
+  }
+
+  return { session };
+}
+
+export async function onRequestGet(context) {
+  const url = new URL(context.request.url);
+  const sessionId = url.searchParams.get("session_id");
+  const productId = url.searchParams.get("product");
+  const verifyOnly = url.searchParams.get("verify") === "1";
+  const product = PRODUCTS[productId];
+
+  if (!sessionId || !sessionId.startsWith("cs_") || !product) {
+    return errorResponse("Invalid download request.", 400);
+  }
+
+  const verification = await verifyPurchase(context, sessionId, product);
+  if (verification.error) return verification.error;
+
+  if (verifyOnly) {
+    const object = await context.env.DOWNLOADS.head(product.objectKey);
+    if (!object) {
+      return errorResponse("The purchased download file is temporarily unavailable.", 404);
+    }
+
+    return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+    });
   }
 
   const object = await context.env.DOWNLOADS.get(product.objectKey);
