@@ -9,201 +9,101 @@ const pageTitle = 'The Funk Strut (Radio Version)';
     <meta name="robots" content="noindex, nofollow" />
     <title>{pageTitle}</title>
 
-<style>
-  :root {
-    --gold: #d4af37;
-    --black: #050505;
-    --white: #ffffff;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html,
-  body {
-    width: 100%;
-    min-height: 100%;
-    overflow-x: hidden;
-  }
-
-  body {
-    background: #000;
-    color: var(--white);
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .hero {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-image:
-      linear-gradient(
-        rgba(0,0,0,0.03),
-        rgba(0,0,0,0.12)
-      ),
-      url('/images/hero/logos/thefunkstrutradio.png');
-    background-size: 30%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .overlay {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    text-align: right;
-    gap: 8px;
-    padding-right: 10%;
-    padding-top: 8%;
-    padding-left: 20px;
-  }
-
-  .status {
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    margin-bottom: 14px;
-    color: #ffffff;
-    text-shadow: 0 0 12px rgba(255,255,255,0.5);
-  }
-
-  .loader {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 30px;
-    border: 4px solid rgba(255,255,255,0.2);
-    border-top: 4px solid var(--gold);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  .download-btn {
-    display: none;
-    background: #d4af37;
-    color: #000;
-    padding: 12px 24px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 0 18px rgba(212,175,55,0.45);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    margin-top: 10px;
-  }
-
-  .download-btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 24px rgba(212,175,55,0.7);
-  }
-
-  .notice {
-    margin-top: 18px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.82);
-  }
-
-  @media (max-width: 1024px) {
-    .hero { background-size: 52%; }
-    .overlay { max-width: 90%; padding-right: 8%; }
-    .status { font-size: 0.82rem; letter-spacing: 2px; }
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      background-size: 58%;
-      background-position: center 18%;
-    }
-    .overlay { padding-right: 4%; padding-top: 18%; }
-    .status { font-size: 0.72rem; letter-spacing: 2px; line-height: 1.5; }
-    .loader { width: 58px; height: 58px; }
-    .download-btn { width: 100%; max-width: 260px; font-size: 0.82rem; padding: 12px 16px; }
-    .notice { font-size: 0.78rem; line-height: 1.4; }
-  }
-
-  @media (max-width: 480px) {
-    .hero { background-size: 64%; }
-    .status { font-size: 0.66rem; letter-spacing: 1px; }
-    .download-btn { font-size: 0.78rem; padding: 10px 14px; }
-    .notice { font-size: 0.68rem; }
-  }
-
-  @media (max-height: 500px) and (orientation: landscape) {
-    .hero { background-size: 28%; padding-top: 40px; padding-bottom: 40px; }
-    .overlay { transform: scale(0.92); }
-    .status { margin-bottom: 10px; }
-    .loader { width: 48px; height: 48px; margin-bottom: 18px; }
-    .notice { margin-top: 12px; }
-  }
-</style>
+    <style>
+      :root { --gold: #d4af37; --white: #fff; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 100%; min-height: 100%; overflow-x: hidden; }
+      body { background: #000; color: var(--white); font-family: Arial, Helvetica, sans-serif; }
+      .hero {
+        width: 100%; min-height: 100vh; padding: 20px;
+        background-image: linear-gradient(rgba(0,0,0,.03), rgba(0,0,0,.12)), url('/images/hero/logos/thefunkstrutradio.png');
+        background-size: 30%; background-position: center; background-repeat: no-repeat;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .overlay {
+        width: 100%; max-width: 1200px; margin-left: auto;
+        display: flex; flex-direction: column; align-items: flex-end; text-align: right;
+        gap: 12px; padding-right: 10%; padding-top: 8%; padding-left: 20px;
+      }
+      .status { font-size: .78rem; letter-spacing: 2px; color: #fff; text-shadow: 0 0 12px rgba(255,255,255,.5); line-height: 1.5; }
+      .loader {
+        width: 64px; height: 64px; border: 4px solid rgba(255,255,255,.2);
+        border-top: 4px solid var(--gold); border-radius: 50%; animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .download-btn, .return-link {
+        display: none; background: var(--gold); color: #000; padding: 12px 24px;
+        font-size: .9rem; font-weight: bold; border-radius: 10px; text-decoration: none;
+        box-shadow: 0 0 18px rgba(212,175,55,.45); margin-top: 8px;
+      }
+      .return-link { background: transparent; color: var(--gold); box-shadow: none; padding-right: 0; }
+      .notice { margin-top: 8px; font-size: .85rem; color: rgba(255,255,255,.82); }
+      @media (max-width: 1024px) { .hero { background-size: 52%; } .overlay { max-width: 90%; padding-right: 8%; } }
+      @media (max-width: 768px) {
+        .hero { background-size: 58%; background-position: center 18%; }
+        .overlay { padding-right: 4%; padding-top: 18%; }
+        .download-btn { width: 100%; max-width: 260px; text-align: center; }
+      }
+      @media (max-width: 480px) { .hero { background-size: 64%; } }
+    </style>
   </head>
 
   <body>
     <section class="hero">
       <div class="overlay">
-        <div id="status" class="status">PREPARING YOUR DOWNLOAD...</div>
+        <div id="status" class="status">VERIFYING YOUR PAYMENT...</div>
         <div id="loader" class="loader"></div>
-
-        <a
-          id="downloadBtn"
-          class="download-btn"
-          href="https://pub-d209883fb1bc4453b94a7ec48994b475.r2.dev/The-Funk-Strut-radio.zip"
-          download
-        >
-          DOWNLOAD NOW
-        </a>
-
-        <div class="notice">Thank you for your purchase.</div>
+        <a id="downloadBtn" class="download-btn" href="#">DOWNLOAD NOW</a>
+        <a id="returnLink" class="return-link" href="/store">RETURN TO STORE</a>
+        <div id="notice" class="notice"></div>
       </div>
     </section>
 
-<script>
-  const status = document.getElementById("status");
-  const loader = document.getElementById("loader");
-  const downloadBtn = document.getElementById("downloadBtn");
-  let hasDownloaded = false;
+    <script>
+      const status = document.getElementById("status");
+      const loader = document.getElementById("loader");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const returnLink = document.getElementById("returnLink");
+      const notice = document.getElementById("notice");
+      const sessionId = new URLSearchParams(window.location.search).get("session_id");
 
-  setTimeout(() => {
-    loader.style.display = "none";
-    downloadBtn.style.display = "inline-block";
-    status.textContent = "";
-  }, 4000);
+      async function verifyPayment() {
+        if (!sessionId || !sessionId.startsWith("cs_")) {
+          loader.style.display = "none";
+          status.textContent = "PAYMENT VERIFICATION REQUIRED";
+          notice.textContent = "Please complete your purchase through Stripe before downloading.";
+          returnLink.style.display = "inline-block";
+          return;
+        }
 
-  downloadBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (hasDownloaded) return;
-    hasDownloaded = true;
-    status.textContent = "PREPARING DOWNLOAD...";
+        const verifyUrl = `/api/download?product=radio&verify=1&session_id=${encodeURIComponent(sessionId)}`;
+        const downloadUrl = `/api/download?product=radio&session_id=${encodeURIComponent(sessionId)}`;
 
-    setTimeout(() => {
-      window.open(
-        "https://pub-d209883fb1bc4453b94a7ec48994b475.r2.dev/The-Funk-Strut-radio.zip",
-        "_blank"
-      );
+        try {
+          const response = await fetch(verifyUrl, { cache: "no-store" });
+          if (!response.ok) {
+            const message = await response.text();
+            throw new Error(message || "Payment verification failed.");
+          }
 
-      status.innerHTML = "DOWNLOAD STARTED<br>RETURNING TO HOME PAGE...";
+          loader.style.display = "none";
+          status.textContent = "PAYMENT VERIFIED";
+          notice.textContent = "Thank you for your purchase. Your secure download is ready.";
+          downloadBtn.href = downloadUrl;
+          downloadBtn.style.display = "inline-block";
+        } catch (error) {
+          loader.style.display = "none";
+          status.textContent = "PAYMENT COULD NOT BE VERIFIED";
+          notice.textContent = error.message || "Please contact RLT Music & Film Works for assistance.";
+          returnLink.style.display = "inline-block";
+        }
+      }
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 3000);
-    }, 1000);
-  });
-</script>
+      downloadBtn.addEventListener("click", () => {
+        status.textContent = "STARTING SECURE DOWNLOAD...";
+      });
+
+      verifyPayment();
+    </script>
   </body>
 </html>
