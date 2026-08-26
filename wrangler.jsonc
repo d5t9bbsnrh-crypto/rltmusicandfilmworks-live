@@ -1,12 +1,6 @@
-// Cloudflare Pages rebuild trigger after build settings correction: 2026-08-25
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "rltmusicandfilmworks-production",
+  "name": "rltmusicandfilmworks-live",
   "compatibility_date": "2026-08-25",
-  "assets": {
-    "directory": "./dist"
-  },
-  "observability": {
-    "enabled": true
-  }
+  "pages_build_output_dir": "./dist"
 }
