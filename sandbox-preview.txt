@@ -1,0 +1,1 @@
+Sandbox preview deployment trigger for Stripe test checkout.
