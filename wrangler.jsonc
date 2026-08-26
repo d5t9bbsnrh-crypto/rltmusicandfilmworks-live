@@ -1,3 +1,4 @@
+// Cloudflare Pages rebuild trigger after build settings correction: 2026-08-25
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "rltmusicandfilmworks-production",
