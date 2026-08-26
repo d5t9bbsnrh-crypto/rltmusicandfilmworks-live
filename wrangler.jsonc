@@ -2,5 +2,11 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "rltmusicandfilmworks-live",
   "compatibility_date": "2026-08-25",
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  "r2_buckets": [
+    {
+      "binding": "DOWNLOADS",
+      "bucket_name": "rlt-downloads"
+    }
+  ]
 }
