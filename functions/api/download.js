@@ -1,4 +1,4 @@
-// Production deployment trigger after adding STRIPE_SECRET_KEY: 2026-08-27
+// Production secure download handler
 const PRODUCTS = {
   radio: {
     amountSubtotal: 499,
@@ -53,6 +53,41 @@ function stripeLookupError(status) {
 function isFresh(created) {
   const now = Math.floor(Date.now() / 1000);
   return created && now - created <= MAX_SESSION_AGE_SECONDS;
+}
+
+function redemptionKey(productId, stripeObject) {
+  const stripeId = String(stripeObject?.id || "unknown").replace(/[^A-Za-z0-9_-]/g, "");
+  return `_redemptions/${productId}/${stripeId}.json`;
+}
+
+async function hasBeenRedeemed(context, key) {
+  const marker = await context.env.DOWNLOADS.head(key);
+  return Boolean(marker);
+}
+
+async function claimRedemption(context, key, productId, stripeObject) {
+  const onlyIf = new Headers({ "If-None-Match": "*" });
+  const redeemedAt = new Date().toISOString();
+  const body = JSON.stringify({
+    product: productId,
+    stripeId: stripeObject.id,
+    redeemedAt,
+  });
+
+  const marker = await context.env.DOWNLOADS.put(key, body, {
+    onlyIf,
+    httpMetadata: {
+      contentType: "application/json; charset=utf-8",
+      cacheControl: "no-store",
+    },
+    customMetadata: {
+      product: productId,
+      stripeId: String(stripeObject.id),
+      redeemedAt,
+    },
+  });
+
+  return Boolean(marker);
 }
 
 async function verifyCheckoutSession(context, sessionId, product) {
@@ -173,13 +208,22 @@ export async function onRequestGet(context) {
   );
   if (verification.error) return verification.error;
 
+  const key = redemptionKey(productId, verification.stripeObject);
+
+  if (await hasBeenRedeemed(context, key)) {
+    return errorResponse(
+      "This download has already been used. Each purchase allows one download.",
+      410
+    );
+  }
+
   if (verifyOnly) {
     const object = await context.env.DOWNLOADS.head(product.objectKey);
     if (!object) {
       return errorResponse("The purchased download file is temporarily unavailable.", 404);
     }
 
-    return new Response(JSON.stringify({ ok: true }), {
+    return new Response(JSON.stringify({ ok: true, remainingDownloads: 1 }), {
       status: 200,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -192,6 +236,20 @@ export async function onRequestGet(context) {
   const object = await context.env.DOWNLOADS.get(product.objectKey);
   if (!object) {
     return errorResponse("The purchased download file is temporarily unavailable.", 404);
+  }
+
+  const claimed = await claimRedemption(
+    context,
+    key,
+    productId,
+    verification.stripeObject
+  );
+
+  if (!claimed) {
+    return errorResponse(
+      "This download has already been used. Each purchase allows one download.",
+      410
+    );
   }
 
   const headers = new Headers();
