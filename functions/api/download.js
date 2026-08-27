@@ -1,4 +1,4 @@
-// Production deployment trigger: 2026-08-27
+// Production deployment trigger after Stripe secret update: 2026-08-27
 const PRODUCTS = {
   radio: {
     amountSubtotal: 499,
