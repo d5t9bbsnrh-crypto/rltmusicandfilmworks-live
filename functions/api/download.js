@@ -1,3 +1,4 @@
+// Production deployment trigger: 2026-08-27
 const PRODUCTS = {
   radio: {
     amountSubtotal: 499,
