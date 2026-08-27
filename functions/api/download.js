@@ -24,15 +24,30 @@ function errorResponse(message, status) {
   });
 }
 
-async function verifyPurchase(context, sessionId, product) {
-  if (!context.env.STRIPE_SECRET_KEY) {
-    return { error: errorResponse("Download service is not configured yet.", 503) };
+function stripeLookupError(status) {
+  if (status === 401) {
+    return errorResponse(
+      "Stripe rejected the Production API key. Please update the live STRIPE_SECRET_KEY in Cloudflare.",
+      403
+    );
   }
 
-  if (!context.env.DOWNLOADS) {
-    return { error: errorResponse("Download storage is not configured yet.", 503) };
+  if (status === 404) {
+    return errorResponse(
+      "This Stripe payment was created in a different Stripe account or environment than the Production API key.",
+      403
+    );
   }
 
+  return errorResponse(`Stripe verification failed with status ${status}.`, 403);
+}
+
+function isFresh(created) {
+  const now = Math.floor(Date.now() / 1000);
+  return created && now - created <= MAX_SESSION_AGE_SECONDS;
+}
+
+async function verifyCheckoutSession(context, sessionId, product) {
   const stripeResponse = await fetch(
     `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
     {
@@ -43,30 +58,7 @@ async function verifyPurchase(context, sessionId, product) {
   );
 
   if (!stripeResponse.ok) {
-    if (stripeResponse.status === 401) {
-      return {
-        error: errorResponse(
-          "Stripe rejected the Production API key. Please update the live STRIPE_SECRET_KEY in Cloudflare.",
-          403
-        ),
-      };
-    }
-
-    if (stripeResponse.status === 404) {
-      return {
-        error: errorResponse(
-          "This Checkout Session was created in a different Stripe account or environment than the Production API key.",
-          403
-        ),
-      };
-    }
-
-    return {
-      error: errorResponse(
-        `Stripe verification failed with status ${stripeResponse.status}.`,
-        403
-      ),
-    };
+    return { error: stripeLookupError(stripeResponse.status) };
   }
 
   const session = await stripeResponse.json();
@@ -81,8 +73,7 @@ async function verifyPurchase(context, sessionId, product) {
     return { error: errorResponse("Payment verification failed for this download.", 403) };
   }
 
-  const now = Math.floor(Date.now() / 1000);
-  if (!session.created || now - session.created > MAX_SESSION_AGE_SECONDS) {
+  if (!isFresh(session.created)) {
     return {
       error: errorResponse(
         "This secure download link has expired. Please contact RLT Music & Film Works for assistance.",
@@ -91,21 +82,84 @@ async function verifyPurchase(context, sessionId, product) {
     };
   }
 
-  return { session };
+  return { stripeObject: session };
+}
+
+async function verifyPaymentIntent(context, paymentIntentId, product) {
+  const stripeResponse = await fetch(
+    `https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentIntentId)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${context.env.STRIPE_SECRET_KEY}`,
+      },
+    }
+  );
+
+  if (!stripeResponse.ok) {
+    return { error: stripeLookupError(stripeResponse.status) };
+  }
+
+  const paymentIntent = await stripeResponse.json();
+  const paidAmount = paymentIntent.amount_received || paymentIntent.amount;
+
+  if (
+    paymentIntent.status !== "succeeded" ||
+    paymentIntent.currency !== "usd" ||
+    paidAmount !== product.amountSubtotal
+  ) {
+    return { error: errorResponse("Payment verification failed for this download.", 403) };
+  }
+
+  if (!isFresh(paymentIntent.created)) {
+    return {
+      error: errorResponse(
+        "This secure download link has expired. Please contact RLT Music & Film Works for assistance.",
+        410
+      ),
+    };
+  }
+
+  return { stripeObject: paymentIntent };
+}
+
+async function verifyPurchase(context, sessionId, paymentIntentId, product) {
+  if (!context.env.STRIPE_SECRET_KEY) {
+    return { error: errorResponse("Download service is not configured yet.", 503) };
+  }
+
+  if (!context.env.DOWNLOADS) {
+    return { error: errorResponse("Download storage is not configured yet.", 503) };
+  }
+
+  if (sessionId && sessionId.startsWith("cs_")) {
+    return verifyCheckoutSession(context, sessionId, product);
+  }
+
+  if (paymentIntentId && paymentIntentId.startsWith("pi_")) {
+    return verifyPaymentIntent(context, paymentIntentId, product);
+  }
+
+  return { error: errorResponse("Invalid download request.", 400) };
 }
 
 export async function onRequestGet(context) {
   const url = new URL(context.request.url);
   const sessionId = url.searchParams.get("session_id");
+  const paymentIntentId = url.searchParams.get("payment_intent");
   const productId = url.searchParams.get("product");
   const verifyOnly = url.searchParams.get("verify") === "1";
   const product = PRODUCTS[productId];
 
-  if (!sessionId || !sessionId.startsWith("cs_") || !product) {
+  if (!product) {
     return errorResponse("Invalid download request.", 400);
   }
 
-  const verification = await verifyPurchase(context, sessionId, product);
+  const verification = await verifyPurchase(
+    context,
+    sessionId,
+    paymentIntentId,
+    product
+  );
   if (verification.error) return verification.error;
 
   if (verifyOnly) {
