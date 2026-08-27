@@ -59,12 +59,15 @@ const pageTitle = 'The Funk Strut (Radio Version)';
       </div>
     </section>
 
+    <iframe id="downloadFrame" title="Secure download" style="display:none"></iframe>
+
     <script>
       const status = document.getElementById("status");
       const loader = document.getElementById("loader");
       const downloadBtn = document.getElementById("downloadBtn");
       const returnLink = document.getElementById("returnLink");
       const notice = document.getElementById("notice");
+      const downloadFrame = document.getElementById("downloadFrame");
       const sessionId = new URLSearchParams(window.location.search).get("session_id");
 
       async function verifyPayment() {
@@ -88,7 +91,7 @@ const pageTitle = 'The Funk Strut (Radio Version)';
 
           loader.style.display = "none";
           status.textContent = "PAYMENT VERIFIED";
-          notice.textContent = "Thank you for your purchase. Your secure download is ready.";
+          notice.textContent = "Thank you for your purchase. This purchase allows one download.";
           downloadBtn.href = downloadUrl;
           downloadBtn.style.display = "inline-block";
         } catch (error) {
@@ -99,8 +102,17 @@ const pageTitle = 'The Funk Strut (Radio Version)';
         }
       }
 
-      downloadBtn.addEventListener("click", () => {
-        status.textContent = "STARTING SECURE DOWNLOAD...";
+      downloadBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const downloadUrl = downloadBtn.href;
+        downloadBtn.style.display = "none";
+        status.textContent = "DOWNLOAD STARTED";
+        notice.textContent = "Your one-time download is starting. Returning you to the RLT store...";
+        downloadFrame.src = downloadUrl;
+
+        setTimeout(() => {
+          window.location.replace("/store");
+        }, 4000);
       });
 
       verifyPayment();
