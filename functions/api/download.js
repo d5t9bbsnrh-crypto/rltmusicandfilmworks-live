@@ -25,6 +25,13 @@ function errorResponse(message, status) {
   });
 }
 
+function normalizeStripeId(rawValue, prefix) {
+  if (!rawValue) return null;
+  const cleaned = String(rawValue).trim().replace(/\\/g, "");
+  const match = cleaned.match(new RegExp(`${prefix}[A-Za-z0-9_]+`));
+  return match ? match[0] : null;
+}
+
 function stripeLookupError(status) {
   if (status === 401) {
     return errorResponse(
@@ -132,12 +139,15 @@ async function verifyPurchase(context, sessionId, paymentIntentId, product) {
     return { error: errorResponse("Download storage is not configured yet.", 503) };
   }
 
-  if (sessionId && sessionId.startsWith("cs_")) {
-    return verifyCheckoutSession(context, sessionId, product);
+  const normalizedSessionId = normalizeStripeId(sessionId, "cs_");
+  const normalizedPaymentIntentId = normalizeStripeId(paymentIntentId, "pi_");
+
+  if (normalizedSessionId) {
+    return verifyCheckoutSession(context, normalizedSessionId, product);
   }
 
-  if (paymentIntentId && paymentIntentId.startsWith("pi_")) {
-    return verifyPaymentIntent(context, paymentIntentId, product);
+  if (normalizedPaymentIntentId) {
+    return verifyPaymentIntent(context, normalizedPaymentIntentId, product);
   }
 
   return { error: errorResponse("Invalid download request.", 400) };
@@ -146,7 +156,7 @@ async function verifyPurchase(context, sessionId, paymentIntentId, product) {
 export async function onRequestGet(context) {
   const url = new URL(context.request.url);
   const sessionId = url.searchParams.get("session_id");
-  const paymentIntentId = url.searchParams.get("payment_intent");
+  const paymentIntentId = url.searchParams.get("payment_intent") || url.searchParams.get("pi");
   const productId = url.searchParams.get("product");
   const verifyOnly = url.searchParams.get("verify") === "1";
   const product = PRODUCTS[productId];
