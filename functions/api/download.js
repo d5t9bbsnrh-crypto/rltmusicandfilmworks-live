@@ -43,7 +43,30 @@ async function verifyPurchase(context, sessionId, product) {
   );
 
   if (!stripeResponse.ok) {
-    return { error: errorResponse("We could not verify this Stripe checkout session.", 403) };
+    if (stripeResponse.status === 401) {
+      return {
+        error: errorResponse(
+          "Stripe rejected the Production API key. Please update the live STRIPE_SECRET_KEY in Cloudflare.",
+          403
+        ),
+      };
+    }
+
+    if (stripeResponse.status === 404) {
+      return {
+        error: errorResponse(
+          "This Checkout Session was created in a different Stripe account or environment than the Production API key.",
+          403
+        ),
+      };
+    }
+
+    return {
+      error: errorResponse(
+        `Stripe verification failed with status ${stripeResponse.status}.`,
+        403
+      ),
+    };
   }
 
   const session = await stripeResponse.json();
